@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "damp-tree-42c4",
+  "main": "worker.js",
+  "compatibility_date": "2026-07-28",
+  "vars": {
+    "FRONTEND_ORIGIN": "https://mrobika84-ship-it.github.io/Robert-weather-center/",
+    "NETATMO_REDIRECT_URI": "https://damp-tree-42c4.mrobika84.workers.dev/callback"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "RWC_KV",
+      "id": "IDE_IRD_MAJD_A_KV_NAMESPACE_ID-T"
+    }
+  ]
+}
