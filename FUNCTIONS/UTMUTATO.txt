@@ -1,0 +1,31 @@
+ROBERT WEATHER CENTER – ÉLŐ ADAT JAVÍTÁS
+
+A ZIP tartalmát a GitHub repository GYÖKERÉBE töltsd fel.
+
+Felülírandó:
+- app.js
+- config.js
+
+Új mappa:
+- functions/
+  - login.js
+  - callback.js
+  - api/weather.js
+  - _lib/netatmo.js
+
+Cloudflare Variables:
+- FRONTEND_ORIGIN = https://robert-weather-center.pages.dev/
+- NETATMO_REDIRECT_URI = https://robert-weather-center.pages.dev/callback
+
+Cloudflare Secrets:
+- NETATMO_CLIENT_ID
+- NETATMO_CLIENT_SECRET
+
+Cloudflare KV binding:
+- RWC_KV
+
+Netatmo Redirect URI:
+- https://robert-weather-center.pages.dev/callback
+
+Biztonság:
+A korábban képen megjelent Client Secretet cseréld le újra.
