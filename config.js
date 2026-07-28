@@ -1,5 +1,3 @@
-// A Cloudflare Worker publikus címe kerül ide a végén.
-// Példa: https://robert-netatmo-api.felhasznalonev.workers.dev
-window.RWC_CONFIG = {
-  apiBaseUrl: ""
-};
+// Az API ugyanazon a Cloudflare Pages címen fut.
+// Ebbe a fájlba nem kerül titkos kulcs.
+window.RWC_CONFIG = {};
