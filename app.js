@@ -65,11 +65,12 @@ function updateAdvice(){
   $("alertAirText").textContent=co2<1000?"CO₂ szint rendben":co2+" ppm";
   $("alertVentTitle").textContent=vent;$("alertVentText").textContent=RWC_AI.advice(latestNetatmo,latestOutdoor);
   $("alertBatteryText").textContent="Elem töltöttség: "+(d.outdoorBatteryPercent??"--")+"%";
+  const ai=document.getElementById("aiAdviceText");if(ai)ai.textContent=RWC_AI.advice(latestNetatmo,latestOutdoor);
 }
 async function refreshOutdoor(){
   try{
     const {latitude:lat,longitude:lon}=window.RWC_CONFIG.weather;
-    const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code,apparent_temperature,wind_speed_10m,wind_gusts_10m,wind_direction_10m,cloud_cover,visibility&daily=weather_code,sunrise,sunset,temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max&timezone=auto`;
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code,apparent_temperature,wind_speed_10m,wind_gusts_10m,wind_direction_10m,cloud_cover,visibility&hourly=temperature_2m&past_days=1&forecast_days=7&daily=weather_code,sunrise,sunset,temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max&timezone=auto`;
     const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error("Open-Meteo hiba");const data=await r.json();latestOutdoor=data;
     const code=data.current.weather_code,label=window.RWC_EFFECTS.setWeather(code),icon=weatherIcon(code);
     $("weatherIcon").textContent=icon;$("headerWeatherIcon").textContent=icon;$("weatherLabel").textContent=label;$("headerCondition").textContent=label;
@@ -82,7 +83,12 @@ async function refreshOutdoor(){
     $("alertRainTitle").textContent=(data.daily.precipitation_probability_max[1]||0)>=50?"Eső valószínű":"Csapadék esélye alacsony";$("alertRainText").textContent=(data.daily.precipitation_probability_max[1]||0)+"% esély holnap";
     $("alertUvTitle").textContent=(data.daily.uv_index_max[0]||0)>=6?"Erős UV sugárzás":"UV-index megfelelő";$("alertUvText").textContent=uvLabel(data.daily.uv_index_max[0]);
     $("alertNightTitle").textContent="Éjszaka hűvös lesz";$("alertNightText").textContent="Min. hőmérséklet: "+fmt(data.daily.temperature_2m_min[0])+"°C";
-    RWC_FORECAST.render(data,weatherIcon,fmt);updateAdvice();
+    RWC_FORECAST.render(data,weatherIcon,fmt);
+    const now=Date.now(),hourlyTemps=(data.hourly?.time||[]).map((t,i)=>({t:new Date(t).getTime(),v:Number(data.hourly.temperature_2m[i])})).filter(x=>Number.isFinite(x.v)&&x.t>=now-24*3600*1000&&x.t<=now);
+    RWC_CHARTS.setOutdoorHourly(hourlyTemps.map(x=>x.v));
+    const ai=document.getElementById("aiAdviceText");
+    if(ai)ai.textContent=RWC_AI.advice(latestNetatmo,latestOutdoor);
+    updateAdvice();
   }catch(e){console.error(e)}
 }
 async function refreshNetatmo(){

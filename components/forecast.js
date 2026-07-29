@@ -1,6 +1,6 @@
 window.RWC_FORECAST = {
   mount(){
-    document.getElementById("forecastPanel").innerHTML=`<div class="panel-title">7 NAPOS ELŐREJELZÉS</div><div id="forecastCards" class="forecast-cards"></div><div class="forecast-footer">RÉSZLETES ELŐREJELZÉS →</div>`;
+    document.getElementById("forecastPanel").innerHTML=`<div class="panel-title">7 NAPOS ELŐREJELZÉS</div><div id="forecastCards" class="forecast-cards"></div><div class="ai-advice-card"><div class="ai-advice-title">🤖 ROBERT AI – MAI TANÁCS</div><div id="aiAdviceText" class="ai-advice-text">Az adatok elemzése folyamatban van…</div></div><div class="forecast-footer">RÉSZLETES ELŐREJELZÉS →</div>`;
   },
   render(data,iconFn,fmt){
     const names=["V","H","K","SZE","CSÜ","P","SZO"],box=document.getElementById("forecastCards");box.innerHTML="";

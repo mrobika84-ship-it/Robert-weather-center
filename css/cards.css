@@ -73,3 +73,85 @@
 .alert-card.red strong{color:var(--red)}
 .alert-card.blue strong{color:var(--cyan)}
 .alert-card.cyan strong{color:#56e4ff}
+
+
+/* V7 Ultimate – látványosabb kültéri rész, grafikon és AI panel */
+.outdoor-main{
+  grid-template-columns:1fr 1.15fr;
+  gap:10px;
+}
+.weather-visual{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:0;
+}
+.weather-icon{
+  font-size:clamp(150px,15vw,235px);
+  transform:translateY(4px);
+  filter:drop-shadow(0 18px 28px rgba(0,0,0,.52));
+}
+.outdoor-summary{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+}
+.outdoor-temp{
+  text-shadow:0 8px 28px rgba(0,0,0,.48);
+}
+.indoor-temp-card::before{
+  content:"";
+}
+.indoor-temp-card{
+  background:
+    radial-gradient(circle at 50% 48%,rgba(20,157,255,.20),transparent 48%),
+    linear-gradient(145deg,rgba(14,47,75,.72),rgba(8,24,40,.72));
+}
+.indoor-temp-card strong{
+  text-shadow:0 0 28px rgba(20,157,255,.30);
+}
+.chart-box{
+  height:178px;
+}
+.forecast-panel{
+  display:flex;
+  flex-direction:column;
+}
+.forecast-cards{
+  flex:0 0 auto;
+}
+.ai-advice-card{
+  margin-top:10px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:
+    linear-gradient(135deg,rgba(23,123,174,.20),rgba(30,185,119,.10)),
+    rgba(255,255,255,.035);
+  border:1px solid rgba(83,199,255,.20);
+}
+.ai-advice-title{
+  font-size:10px;
+  color:#9fdfff;
+  letter-spacing:1px;
+  font-weight:800;
+}
+.ai-advice-text{
+  margin-top:7px;
+  font-size:14px;
+  line-height:1.35;
+  color:#f4f8fb;
+}
+.alert-card{
+  transition:transform .25s ease,border-color .25s ease,background .25s ease;
+}
+.alert-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,255,255,.18);
+}
+.alert-card.green>span{animation:alertPulse 2.6s ease-in-out infinite}
+.alert-card.red>span{animation:alertWarn 2s ease-in-out infinite}
+.alert-card.orange>span{animation:alertFloat 3.2s ease-in-out infinite}
+@keyframes alertPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes alertWarn{0%,100%{opacity:1}50%{opacity:.55}}
+@keyframes alertFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
