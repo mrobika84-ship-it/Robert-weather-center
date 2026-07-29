@@ -1,0 +1,13 @@
+RÓBERT IDŐJÁRÁS KÖZPONT V4.1
+
+Ez a változat jelentősen megnöveli a beltéri hőmérséklet kijelzését.
+
+Teendő:
+1. Csomagold ki a ZIP-et.
+2. Töltsd fel a teljes tartalmát a GitHub repository gyökerébe.
+3. Engedd felülírni a meglévő fájlokat.
+4. Commit changes.
+5. Várd meg a Cloudflare sikeres deploymentet.
+6. Frissíts Ctrl + F5-tel.
+
+A Netatmo-kapcsolat és minden más funkció változatlan marad.

@@ -100,3 +100,63 @@ footer{display:flex;justify-content:space-between;padding:0 5px;color:rgba(255,2
   #radarFrame{height:112px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+/* V4.1 – nagyobb és hangsúlyosabb beltéri hőmérséklet */
+.indoor-panel{
+  display:flex;
+  flex-direction:column;
+}
+
+.indoor-grid{
+  flex:1;
+  grid-template-columns:1.15fr .85fr;
+  grid-template-rows:minmax(155px,1fr) auto auto;
+}
+
+.indoor-main{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:linear-gradient(145deg,rgba(31,72,96,.24),rgba(255,255,255,.045));
+}
+
+.indoor-main span{
+  font-size:12px;
+  letter-spacing:1.1px;
+}
+
+.indoor-main strong{
+  font-size:clamp(58px,6.2vw,96px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-top:14px;
+  text-shadow:0 5px 20px rgba(0,0,0,.5);
+}
+
+.co2-main{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.co2-main strong{
+  font-size:clamp(34px,3.5vw,52px);
+}
+
+.small-stat{
+  min-height:62px;
+}
+
+@media(max-width:900px){
+  .indoor-grid{
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:minmax(125px,1fr) auto auto;
+  }
+
+  .indoor-main strong{
+    font-size:clamp(48px,7vw,74px);
+  }
+}
