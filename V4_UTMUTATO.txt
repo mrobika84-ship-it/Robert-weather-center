@@ -1,0 +1,18 @@
+RÓBERT IDŐJÁRÁS KÖZPONT 4.0
+
+Töltsd fel a ZIP teljes tartalmát a GitHub repository gyökerébe,
+és engedd felülírni a meglévő fájlokat.
+
+A functions mappa és a Netatmo hitelesítés megmarad.
+
+Újdonságok:
+- teljesen új tablet-elrendezés
+- részletes kültéri panel
+- UV-index és felhőzet
+- új beltéri levegő panel
+- 24 órás helyi grafikonok
+- élő Windy csapadékradar
+- animált időjárási háttér
+- új arculat
+
+A radar külső Windy beágyazás, ezért internetkapcsolat szükséges.
