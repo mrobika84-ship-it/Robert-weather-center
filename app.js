@@ -1,7 +1,7 @@
 const $=id=>document.getElementById(id);
 const fmt=n=>(n===null||n===undefined)?"--":Number(n).toLocaleString("hu-HU",{maximumFractionDigits:1});
 const startedAt=Date.now();
-let refreshDeadline=Date.now()+180000;
+let refreshDeadline=Date.now()+120000;
 let latestNetatmo=null;
 let latestOutdoor=null;
 
@@ -96,10 +96,10 @@ async function refreshNetatmo(){
     const r=await fetch("/api/weather",{cache:"no-store"});
     if(r.status===401){location.href="/login";return}
     if(!r.ok)throw new Error(await r.text());
-    renderNetatmo(await r.json());setConnection("ok","Netatmo élő adatok");refreshDeadline=Date.now()+180000
+    renderNetatmo(await r.json());setConnection("ok","Netatmo élő adatok");refreshDeadline=Date.now()+120000
   }catch(e){console.error(e);setConnection("error","Adatkapcsolati hiba")}
 }
 
 refreshNetatmo();refreshOutdoor();RWC_CHARTS.draw();
-setInterval(()=>{refreshNetatmo();refreshOutdoor()},180000);
+setInterval(()=>{refreshNetatmo();refreshOutdoor()},120000);
 window.addEventListener("resize",()=>RWC_CHARTS.draw());

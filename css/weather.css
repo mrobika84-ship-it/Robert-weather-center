@@ -28,3 +28,19 @@ body.time-night .stars{opacity:.5;background-image:radial-gradient(circle,#fff 0
 .time-tint{
   background:linear-gradient(180deg,rgba(2,10,18,.20),rgba(1,6,12,.88));
 }
+
+
+/* V8 Ultimate – dinamikusabb háttér */
+.background{
+  filter:saturate(.88) brightness(.43) contrast(1.08);
+}
+body.time-sunset .background{
+  filter:saturate(1.02) brightness(.46) contrast(1.08) sepia(.08);
+}
+body.time-night .background{
+  filter:saturate(.62) brightness(.27) contrast(1.12);
+}
+.time-tint{
+  background:
+    linear-gradient(180deg,rgba(1,10,20,.18),rgba(0,5,12,.90));
+}

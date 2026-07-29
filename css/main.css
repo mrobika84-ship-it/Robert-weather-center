@@ -79,3 +79,51 @@ html,body{
 img,canvas,iframe{
   image-rendering:auto;
 }
+
+
+/* V8 Ultimate – prémium keretrendszer */
+:root{
+  --panel:rgba(5,16,28,.94);
+  --panel2:rgba(8,25,42,.93);
+  --line:rgba(80,205,255,.30);
+  --cyan:#45d8ff;
+  --blue:#38a7ff;
+  --green:#45e793;
+}
+
+.panel{
+  background:
+    linear-gradient(145deg,rgba(7,23,39,.94),rgba(3,12,22,.94));
+  border-color:rgba(84,211,255,.27);
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.topbar{
+  border-bottom:1px solid rgba(255,255,255,.07);
+  padding-bottom:8px;
+}
+
+.brand-title{
+  letter-spacing:1px;
+}
+
+.status-zone{
+  padding:8px 11px;
+  border-radius:11px;
+  background:rgba(2,14,24,.52);
+  border:1px solid rgba(84,211,255,.12);
+}
+
+.v8-badge{
+  display:inline-block;
+  margin-top:5px;
+  padding:3px 7px;
+  border-radius:999px;
+  font-size:8px;
+  letter-spacing:1px;
+  color:#8cecff;
+  border:1px solid rgba(69,216,255,.28);
+  background:rgba(69,216,255,.07);
+}

@@ -16,3 +16,19 @@ body.weather-storm .lightning{animation:flash 8s infinite}
 @keyframes fogMove{from{transform:translateX(-20%)}to{transform:translateX(20%)}}
 @keyframes twinkle{from{opacity:.22}to{opacity:.62}}
 @keyframes flash{0%,92%,96%,100%{opacity:0}93%,95%{opacity:.52;background:#fff}}
+
+
+/* V8 finom belépési animáció */
+.panel{
+  animation:panelIn .55s ease both;
+}
+.outdoor-panel{animation-delay:.02s}
+.indoor-panel{animation-delay:.06s}
+.trend-panel{animation-delay:.10s}
+.forecast-panel{animation-delay:.14s}
+.radar-panel{animation-delay:.18s}
+.alerts-panel{animation-delay:.22s}
+@keyframes panelIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}

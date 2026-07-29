@@ -185,3 +185,83 @@
   backdrop-filter:none;
   -webkit-backdrop-filter:none;
 }
+
+
+/* V8 Ultimate – kártyák és hangsúlyok */
+.outdoor-panel{
+  position:relative;
+  overflow:hidden;
+}
+.outdoor-panel::after{
+  content:"";
+  position:absolute;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  left:-180px;
+  top:-190px;
+  background:radial-gradient(circle,rgba(255,169,41,.16),transparent 68%);
+  pointer-events:none;
+}
+.indoor-panel{
+  position:relative;
+  overflow:hidden;
+}
+.indoor-panel::after{
+  content:"";
+  position:absolute;
+  width:330px;
+  height:330px;
+  border-radius:50%;
+  right:-170px;
+  top:-150px;
+  background:radial-gradient(circle,rgba(56,167,255,.18),transparent 68%);
+  pointer-events:none;
+}
+.weather-icon{
+  animation:weatherFloat 5s ease-in-out infinite;
+}
+.indoor-temp-card strong{
+  font-size:clamp(76px,7.5vw,118px);
+  color:#69baff;
+}
+.indoor-temp-card{
+  border-color:rgba(69,216,255,.20);
+}
+.outdoor-temp,
+.indoor-temp-card strong{
+  font-variant-numeric:tabular-nums;
+}
+.stat,
+.indoor-small,
+.micro-card,
+.forecast-card,
+.alert-card{
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.025));
+}
+.forecast-card:hover,
+.stat:hover,
+.indoor-small:hover,
+.micro-card:hover{
+  border-color:rgba(69,216,255,.26);
+}
+.ai-advice-card{
+  position:relative;
+  overflow:hidden;
+}
+.ai-advice-card::after{
+  content:"AI";
+  position:absolute;
+  right:12px;
+  bottom:-8px;
+  font-size:54px;
+  font-weight:900;
+  color:rgba(255,255,255,.035);
+}
+.alert-card{
+  min-height:64px;
+}
+@keyframes weatherFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
