@@ -1,8 +1,15 @@
-(function(){
- const effects=document.getElementById('weatherEffects');
- function timeTheme(){const h=new Date().getHours();document.body.classList.remove('time-day','time-sunset','time-night');document.body.classList.add(h>=7&&h<18?'time-day':h>=18&&h<21?'time-sunset':'time-night')}
- function info(c){if(c===0)return['clear','Derült'];if([1,2].includes(c))return['partly','Részben felhős'];if([3,45,48].includes(c))return['cloudy',c===3?'Borult':'Ködös'];if([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(c))return['rain','Esős'];if([71,73,75,77,85,86].includes(c))return['snow','Havas'];if([95,96,99].includes(c))return['storm','Viharos'];return['partly','Változó']}
- function draw(kind){let h='';if(['partly','cloudy','rain','snow','storm'].includes(kind))h='<div class="cloud"></div><div class="cloud c2"></div><div class="cloud c3"></div>';if(kind==='rain'||kind==='storm')h+='<div class="rain"></div>';if(kind==='snow')h+='<div class="snow"></div>';if(kind==='storm')h+='<div class="lightning"></div>';if(document.body.classList.contains('time-night'))h+='<div class="stars"></div>';effects.innerHTML=h}
- async function update(){timeTheme();try{const cfg=window.RWC_CONFIG?.weather||{},lat=cfg.latitude||46.517,lon=cfg.longitude||11.5;const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code&timezone=auto`,{cache:'no-store'});const d=await r.json(),[kind,label]=info(d.current.weather_code);document.getElementById('weatherLabel').textContent=label;document.getElementById('outsideCondition').textContent='🌦 '+label;draw(kind)}catch(e){document.getElementById('weatherLabel').textContent='Nem elérhető';document.getElementById('outsideCondition').textContent='Időjárás nem elérhető';draw('partly')}}
- update();setInterval(update,15*60*1000);setInterval(timeTheme,60*1000)
-})();
+window.RWC_EFFECTS = {
+  setWeather(code) {
+    let cls = "weather-partly", label = "Változó";
+    if (code === 0) [cls,label] = ["weather-clear","Derült"];
+    else if ([1,2].includes(code)) [cls,label] = ["weather-partly","Részben felhős"];
+    else if (code === 3) [cls,label] = ["weather-cloudy","Borult"];
+    else if ([45,48].includes(code)) [cls,label] = ["weather-fog","Ködös"];
+    else if ([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code)) [cls,label] = ["weather-rain","Esős"];
+    else if ([71,73,75,77,85,86].includes(code)) [cls,label] = ["weather-snow","Havas"];
+    else if ([95,96,99].includes(code)) [cls,label] = ["weather-storm","Viharos"];
+    document.body.classList.remove("weather-clear","weather-partly","weather-cloudy","weather-fog","weather-rain","weather-snow","weather-storm");
+    document.body.classList.add(cls);
+    return label;
+  }
+};

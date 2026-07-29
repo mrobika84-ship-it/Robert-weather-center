@@ -1,3 +1,21 @@
-Töltsd fel a GitHub repository gyökerébe:
-index.html, style.css, effects.js, config.js és az assets mappát.
-Az app.js és functions mappa maradjon változatlan.
+RÓBERT IDŐJÁRÁS KÖZPONT V3
+
+A ZIP tartalmát töltsd fel a GitHub repository gyökerébe.
+Felülírandó:
+- index.html
+- style.css
+- app.js
+- effects.js
+- config.js
+- functions/_lib/netatmo.js
+- functions/api/weather.js
+
+Az assets mappa tartalmazza a tiszta Dolomitok hátteret.
+
+Új funkciók:
+- napkelte / napnyugta
+- holdfázis
+- kültéri modul elemállapot
+- 24 órás helyi grafikonok
+- köd / eső / hó / vihar animáció
+- riasztások magas CO2, magas páratartalom és fagy esetén
