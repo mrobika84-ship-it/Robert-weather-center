@@ -44,3 +44,20 @@ canvas{width:100%;height:78px;display:block}.alert-bar{padding:8px 12px;border-r
 .hidden{display:none}.source{text-align:right;font-size:9px;color:rgba(255,255,255,.55)}
 @media(max-width:900px){body{padding:8px}.extras{grid-template-columns:repeat(4,1fr)}.charts{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+/* V3.1 – részletes kültéri panel */
+.outdoor-card{justify-content:flex-start;gap:16px}
+.outdoor-main{display:flex;align-items:center;justify-content:center;gap:22px;flex:1;min-height:0}
+.weather-icon{font-size:clamp(58px,8vw,112px);line-height:1;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45))}
+.weather-name{font-size:clamp(17px,2vw,26px);font-weight:700;color:#dce6ef;margin-top:6px}
+.outdoor-details{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.detail-box{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.11);border-radius:12px;padding:9px 11px}
+.detail-box span{display:block;color:#aeb9c6;font-size:10px;text-transform:uppercase;letter-spacing:.7px}
+.detail-box strong{display:block;margin-top:4px;font-size:clamp(15px,1.6vw,22px)}
+@media(max-width:900px){
+  .outdoor-main{gap:10px}
+  .weather-icon{font-size:52px}
+  .outdoor-details{grid-template-columns:repeat(3,1fr)}
+  .detail-box{padding:7px}
+}

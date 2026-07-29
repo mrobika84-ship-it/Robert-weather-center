@@ -22,7 +22,7 @@ $("moonPhase").textContent=moonPhaseName();
 
 function render(d){
   $("outTemp").textContent=fmt(d.outdoorTemperature);$("inTemp").textContent=fmt(d.indoorTemperature);$("co2").textContent=d.co2??"--";
-  $("inHum").textContent=(d.indoorHumidity??"--")+"%";$("outHum").textContent=(d.outdoorHumidity??"--")+"%";
+  $("inHum").textContent=(d.indoorHumidity??"--")+"%";$("outHum").textContent=(d.outdoorHumidity??"--")+"%";$("outdoorHumHero").textContent=(d.outdoorHumidity??"--")+"%";
   $("pressure").textContent=(d.pressure??"--")+" mbar";$("battery").textContent=d.outdoorBatteryPercent!=null?d.outdoorBatteryPercent+"%":"--";
   const updated=d.updatedAt?new Date(d.updatedAt*1000):new Date();$("updated").textContent=updated.toLocaleTimeString("hu-HU",{hour:"2-digit",minute:"2-digit"});
   applyAdvice(d);saveHistory(d);drawCharts();
@@ -56,15 +56,42 @@ function drawCharts(){
   if(temps.length)drawLine($("tempChart"),temps,Math.min(...temps)-1,Math.max(...temps)+1);
   if(co2.length)drawLine($("co2Chart"),co2,Math.min(...co2)-50,Math.max(...co2)+50);
 }
+function weatherIcon(code){
+  if(code===0)return"☀️";
+  if([1,2].includes(code))return"🌤️";
+  if(code===3)return"☁️";
+  if([45,48].includes(code))return"🌫️";
+  if([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code))return"🌧️";
+  if([71,73,75,77,85,86].includes(code))return"❄️";
+  if([95,96,99].includes(code))return"⛈️";
+  return"🌦️";
+}
+
 async function refreshOutdoor(){
   try{
     const cfg=window.RWC_CONFIG.weather,lat=cfg.latitude,lon=cfg.longitude;
-    const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code&daily=sunrise,sunset&timezone=auto`;
-    const r=await fetch(url,{cache:"no-store"}),data=await r.json();
-    const label=window.RWC_EFFECTS.setWeather(data.current.weather_code);$("weatherLabel").textContent=label;$("outsideCondition").textContent="🌦 "+label;
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code,apparent_temperature,wind_speed_10m&daily=sunrise,sunset,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
+    const r=await fetch(url,{cache:"no-store"});
+    if(!r.ok)throw new Error("Open-Meteo hiba");
+    const data=await r.json();
+
+    const code=data.current.weather_code;
+    const label=window.RWC_EFFECTS.setWeather(code);
+
+    $("weatherLabel").textContent=label;
+    $("outsideCondition").textContent="🌦 "+label;
+    $("weatherIcon").textContent=weatherIcon(code);
+    $("feelsLike").textContent=fmt(data.current.apparent_temperature)+" °C";
+    $("windSpeed").textContent=fmt(data.current.wind_speed_10m)+" km/h";
+    $("tempMin").textContent=fmt(data.daily.temperature_2m_min[0])+" °C";
+    $("tempMax").textContent=fmt(data.daily.temperature_2m_max[0])+" °C";
+    $("rainChance").textContent=(data.daily.precipitation_probability_max[0]??"--")+"%";
     $("sunrise").textContent=new Date(data.daily.sunrise[0]).toLocaleTimeString("hu-HU",{hour:"2-digit",minute:"2-digit"});
     $("sunset").textContent=new Date(data.daily.sunset[0]).toLocaleTimeString("hu-HU",{hour:"2-digit",minute:"2-digit"});
-  }catch(e){$("outsideCondition").textContent="Külső időjárás nem elérhető"}
+  }catch(e){
+    console.error(e);
+    $("outsideCondition").textContent="Külső időjárás nem elérhető";
+  }
 }
 async function refreshNetatmo(){
   try{

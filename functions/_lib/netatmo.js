@@ -158,5 +158,3 @@ export async function stationData(env) {
     outdoorBatteryPercent: outdoorModule?.battery_percent ?? null
   };
 }
-
-// build javítás

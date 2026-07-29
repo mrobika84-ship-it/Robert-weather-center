@@ -1,0 +1,18 @@
+RÓBERT IDŐJÁRÁS KÖZPONT V3.1 – KÜLTÉRI PANEL
+
+Töltsd fel a ZIP teljes tartalmát a GitHub repository gyökerébe.
+A meglévő fájlokat felülírhatod.
+
+A functions mappa változatlan, az élő Netatmo-kapcsolat megmarad.
+
+Új kültéri adatok:
+- nagy időjárás ikon
+- időjárási állapot
+- hőérzet
+- napi minimum
+- napi maximum
+- eső valószínűsége
+- szélsebesség
+- kültéri páratartalom
+
+A teszteléshez hozzáadott weather-rain sort NE tedd vissza.

@@ -35,10 +35,43 @@
     </header>
 
     <main>
-      <section class="card hero">
-        <div class="label">Kültéri hőmérséklet</div>
-        <div class="value"><span id="outTemp">--</span><span class="unit"> °C</span></div>
-        <div class="secondary">Külső időjárás: <strong id="weatherLabel">--</strong></div>
+      <section class="card hero outdoor-card">
+        <div class="label">Kültéri időjárás</div>
+
+        <div class="outdoor-main">
+          <div id="weatherIcon" class="weather-icon">🌤️</div>
+          <div>
+            <div class="value"><span id="outTemp">--</span><span class="unit"> °C</span></div>
+            <div class="weather-name" id="weatherLabel">--</div>
+          </div>
+        </div>
+
+        <div class="outdoor-details">
+          <div class="detail-box">
+            <span>Hőérzet</span>
+            <strong id="feelsLike">-- °C</strong>
+          </div>
+          <div class="detail-box">
+            <span>Mai minimum</span>
+            <strong id="tempMin">-- °C</strong>
+          </div>
+          <div class="detail-box">
+            <span>Mai maximum</span>
+            <strong id="tempMax">-- °C</strong>
+          </div>
+          <div class="detail-box">
+            <span>Eső esélye</span>
+            <strong id="rainChance">--%</strong>
+          </div>
+          <div class="detail-box">
+            <span>Szél</span>
+            <strong id="windSpeed">-- km/h</strong>
+          </div>
+          <div class="detail-box">
+            <span>Páratartalom</span>
+            <strong id="outdoorHumHero">--%</strong>
+          </div>
+        </div>
       </section>
 
       <section class="card">
