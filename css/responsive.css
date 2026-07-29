@@ -22,3 +22,26 @@
   .footerbar{grid-template-columns:repeat(2,1fr)}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
+
+/* Kifejezetten falra szerelt tabletre */
+@media(max-width:1400px){
+  .panel{
+    backdrop-filter:blur(3px);
+    -webkit-backdrop-filter:blur(3px);
+  }
+
+  .outdoor-temp,
+  .weather-label,
+  .indoor-temp-card strong{
+    letter-spacing:-2px;
+  }
+
+  .outdoor-temp{
+    font-weight:800;
+  }
+
+  .indoor-temp-card strong{
+    font-weight:800;
+  }
+}

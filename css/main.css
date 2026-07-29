@@ -43,7 +43,7 @@ body{padding:10px}
   background:linear-gradient(145deg,var(--panel),rgba(3,10,18,.78));
   border:1px solid var(--line);border-radius:16px;
   box-shadow:0 10px 28px rgba(0,0,0,.35);
-  backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px);min-height:0
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);min-height:0
 }
 .panel-title{font-size:11px;font-weight:800;letter-spacing:1.1px;color:#d7e2ed}
 .footerbar{
@@ -52,3 +52,30 @@ body{padding:10px}
 }
 .footerbar span{display:block;color:#91a5b7}
 .footerbar strong{display:block;margin-top:3px;font-size:11px}
+
+
+/* V7.2 – tablet élesség */
+html,body{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+
+.panel{
+  background:linear-gradient(145deg,rgba(7,18,30,.92),rgba(3,10,18,.90));
+  border-color:rgba(120,200,255,.28);
+}
+
+#clock,
+.outdoor-temp,
+.weather-label,
+.indoor-temp-card strong,
+.indoor-small strong,
+.micro-card strong,
+.stat strong{
+  text-shadow:none;
+}
+
+img,canvas,iframe{
+  image-rendering:auto;
+}

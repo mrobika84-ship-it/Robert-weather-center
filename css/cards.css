@@ -155,3 +155,33 @@
 @keyframes alertPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
 @keyframes alertWarn{0%,100%{opacity:1}50%{opacity:.55}}
 @keyframes alertFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+
+/* V7.2 – középső tartalom kontrasztja */
+.outdoor-summary,
+.indoor-temp-card{
+  filter:none;
+}
+
+.indoor-temp-card{
+  background:
+    linear-gradient(145deg,rgba(10,42,68,.88),rgba(7,22,38,.88));
+}
+
+.outdoor-panel,
+.indoor-panel,
+.trend-panel,
+.forecast-panel,
+.radar-panel,
+.alerts-panel{
+  box-shadow:0 8px 24px rgba(0,0,0,.42);
+}
+
+.weather-icon{
+  filter:drop-shadow(0 10px 16px rgba(0,0,0,.42));
+}
+
+.ai-advice-card{
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
