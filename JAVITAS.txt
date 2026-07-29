@@ -1,0 +1,16 @@
+JAVÍTOTT V3 CSOMAG
+
+A ZIP teljes tartalmát töltsd fel a GitHub repository gyökerébe, felülírva a meglévő fájlokat.
+
+A javítás:
+- authorizationUrl export visszaállítva
+- exchangeCode export visszaállítva
+- login és callback hibakezelés javítva
+- FRONTEND_ORIGIN ellenőrzés hozzáadva
+
+Cloudflare változók:
+FRONTEND_ORIGIN = https://robert-weather-center.pages.dev
+NETATMO_REDIRECT_URI = https://robert-weather-center.pages.dev/callback
+
+Ezután várd meg az új Cloudflare deploymentet, majd nyisd meg:
+https://robert-weather-center.pages.dev/login
