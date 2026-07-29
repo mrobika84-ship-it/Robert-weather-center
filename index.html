@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#05070a">
-  <title>Róbert Időjárás Központ 4.0</title>
+  <meta name="theme-color" content="#06101a">
+  <title>Róbert Időjárás Központ V5</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="weather-clear time-day">
@@ -21,119 +21,183 @@
     <div class="lightning"></div>
   </div>
 
-  <div class="shell">
+  <div class="dashboard-shell">
     <header class="topbar">
-      <div class="clock-block">
+      <div class="clock-zone">
         <div id="clock">--:--</div>
         <div id="date">Betöltés…</div>
       </div>
 
-      <div class="logo-block">
-        <div class="mountain-logo">⌁⌁▲⌁⌁</div>
+      <div class="edition-zone">
+        <div id="headerWeatherIcon" class="header-weather-icon">☀️</div>
         <div>
-          <div class="brand-title">RÓBERT IDŐJÁRÁS KÖZPONT</div>
-          <div class="brand-subtitle">Dolomites Edition · V4</div>
+          <div class="edition-title">Dolomites Edition · V5</div>
+          <div class="edition-subtitle" id="headerCondition">Időjárás betöltése…</div>
         </div>
       </div>
 
-      <div class="status-block">
+      <div class="brand-zone">
+        <div class="mountain-mark">⌁▲⌁▲⌁</div>
+        <div>
+          <div class="brand-title">ROBERT WEATHER CENTER</div>
+          <div class="brand-subtitle">RÓBERT IDŐJÁRÁS KÖZPONT</div>
+        </div>
+      </div>
+
+      <div class="status-zone">
         <div id="connection" class="status waiting">● Kapcsolódás…</div>
-        <div id="outsideCondition" class="condition">Időjárás betöltése…</div>
-        <div id="updatedTop" class="updated-top">Frissítés: --</div>
+        <div id="updatedTop">Frissítve: --</div>
+        <div id="nextRefresh">Következő frissítés: --</div>
       </div>
     </header>
 
-    <main class="main-grid">
-      <section class="glass outdoor-panel">
-        <div class="section-heading">KÜLTÉRI IDŐJÁRÁS</div>
+    <main class="layout">
+      <section class="panel outdoor-panel">
+        <div class="panel-title">KÜLTÉRI IDŐJÁRÁS</div>
 
-        <div class="outdoor-hero">
-          <div id="weatherIcon" class="weather-icon">🌤️</div>
-          <div>
-            <div class="mega-temp"><span id="outTemp">--</span><span> °C</span></div>
+        <div class="outdoor-main">
+          <div class="weather-visual">
+            <div id="weatherIcon" class="weather-icon">🌤️</div>
+          </div>
+          <div class="outdoor-summary">
+            <div class="outdoor-temp"><span id="outTemp">--</span><small> °C</small></div>
             <div id="weatherLabel" class="weather-label">--</div>
+            <div class="feels"><span>🌡 HŐÉRZET</span> <strong id="feelsLike">-- °C</strong></div>
           </div>
         </div>
 
-        <div class="metrics-grid">
-          <div class="metric"><span>Hőérzet</span><strong id="feelsLike">-- °C</strong></div>
-          <div class="metric"><span>Minimum</span><strong id="tempMin">-- °C</strong></div>
-          <div class="metric"><span>Maximum</span><strong id="tempMax">-- °C</strong></div>
-          <div class="metric"><span>Eső esélye</span><strong id="rainChance">--%</strong></div>
-          <div class="metric"><span>Szél</span><strong id="windSpeed">-- km/h</strong></div>
-          <div class="metric"><span>UV-index</span><strong id="uvIndex">--</strong></div>
-          <div class="metric"><span>Felhőzet</span><strong id="cloudCover">--%</strong></div>
-          <div class="metric"><span>Páratartalom</span><strong id="outdoorHumHero">--%</strong></div>
+        <div class="outdoor-stats">
+          <div class="stat"><span>MIN.</span><strong id="tempMin">-- °C</strong></div>
+          <div class="stat"><span>MAX.</span><strong id="tempMax">-- °C</strong></div>
+          <div class="stat"><span>SZÉL</span><strong id="windSpeed">-- km/h</strong><em id="windDirection">--</em></div>
+          <div class="stat"><span>ESŐ ESÉLYE</span><strong id="rainChance">--%</strong></div>
+          <div class="stat"><span>UV-INDEX</span><strong id="uvIndex">--</strong><em id="uvText">--</em></div>
+          <div class="stat"><span>FELHŐZET</span><strong id="cloudCover">--%</strong></div>
         </div>
 
-        <div class="sun-strip">
-          <div>🌅 <span>Napkelte</span><strong id="sunrise">--:--</strong></div>
-          <div>🌇 <span>Napnyugta</span><strong id="sunset">--:--</strong></div>
-          <div>🌙 <span>Hold</span><strong id="moonPhase">--</strong></div>
+        <div class="astro-row">
+          <div><span>🌅 NAPFELKELTE</span><strong id="sunrise">--:--</strong></div>
+          <div><span>🌇 NAPNYUGTA</span><strong id="sunset">--:--</strong></div>
+          <div><span>🌙 HOLD FÁZIS</span><strong id="moonPhase">--</strong></div>
+          <div><span>☀️ FÉNYERŐ</span><strong id="brightness">--%</strong></div>
         </div>
       </section>
 
-      <section class="right-column">
-        <div class="glass indoor-panel">
-          <div class="section-heading">BELTÉRI LEVEGŐ</div>
-          <div class="indoor-grid">
-            <div class="indoor-main">
-              <span>Beltéri hőmérséklet</span>
-              <strong><span id="inTemp">--</span> °C</strong>
-            </div>
-            <div class="co2-main">
-              <span>CO₂</span>
-              <strong><span id="co2">--</span> ppm</strong>
-              <div class="badge" id="co2Badge"><i></i><span id="co2Text">Nincs adat</span></div>
-            </div>
-            <div class="small-stat"><span>Páratartalom</span><strong id="inHum">--%</strong></div>
-            <div class="small-stat"><span>Légnyomás</span><strong id="pressure">-- mbar</strong></div>
-            <div class="small-stat"><span>Kültéri modul elem</span><strong id="battery">--%</strong></div>
-            <div class="small-stat"><span>Utolsó Netatmo adat</span><strong id="updated">--</strong></div>
+      <section class="panel indoor-panel">
+        <div class="panel-title">BELTÉRI LEVEGŐ</div>
+
+        <div class="indoor-grid">
+          <div class="indoor-temp-card">
+            <span>BELTÉRI HŐMÉRSÉKLET</span>
+            <strong><span id="inTemp">--</span><small>°C</small></strong>
+            <em id="comfortText">● Kellemes hőmérséklet</em>
+          </div>
+
+          <div class="indoor-small">
+            <span>PÁRATARTALOM</span>
+            <strong id="inHum">--%</strong>
+            <div class="meter"><i id="humidityBar"></i></div>
+          </div>
+
+          <div class="indoor-small">
+            <span>CO₂</span>
+            <strong><span id="co2">--</span> ppm</strong>
+            <em id="co2Text">● Nincs adat</em>
+          </div>
+
+          <div class="indoor-small">
+            <span>LÉGNYOMÁS</span>
+            <strong id="pressure">-- mbar</strong>
+          </div>
+
+          <div class="indoor-small">
+            <span>MODUL ELEM</span>
+            <strong id="battery">--%</strong>
+          </div>
+
+          <div class="micro-card">
+            <span>HARMATPONT</span>
+            <strong id="dewPoint">-- °C</strong>
+          </div>
+
+          <div class="micro-card">
+            <span>ABSZ. PÁRATARTALOM</span>
+            <strong id="absoluteHumidity">-- g/m³</strong>
+          </div>
+
+          <div class="micro-card">
+            <span>KOMFORT INDEX</span>
+            <strong id="comfortIndex">--</strong>
+          </div>
+
+          <div class="micro-card ventilation-micro">
+            <span>SZELLŐZTETÉSI JAVASLAT</span>
+            <strong id="ventRecommendation">--</strong>
           </div>
         </div>
 
-        <div class="glass ventilation-panel">
-          <div class="section-heading">SZELLŐZTETÉSI JAVASLAT</div>
-          <div id="ventMessage" class="vent-message">ADATOK BETÖLTÉSE…</div>
-          <div id="ventReason" class="vent-reason">Kapcsolódás a Netatmo állomáshoz.</div>
-        </div>
-
-        <div id="alertBar" class="alert-bar hidden"></div>
-      </section>
-
-      <section class="glass chart-panel">
-        <div class="chart-head">
-          <span>24 ÓRÁS TREND</span>
-          <div class="legend">
-            <span><i class="temp-line"></i>Beltéri °C</span>
-            <span><i class="co2-line"></i>CO₂</span>
-          </div>
-        </div>
-        <div class="chart-wrap">
-          <canvas id="tempChart"></canvas>
-          <canvas id="co2Chart"></canvas>
+        <div class="last-netatmo">
+          <span>UTOLSÓ NETATMO ADAT</span>
+          <strong id="updated">--</strong>
         </div>
       </section>
 
-      <section class="glass radar-panel">
+      <section class="panel trend-panel">
+        <div class="panel-title">24 ÓRÁS TREND</div>
+        <div class="tabs">
+          <button class="active" data-chart="temperature">HŐMÉRSÉKLET</button>
+          <button data-chart="co2">CO₂</button>
+          <button data-chart="pressure">LÉGNYOMÁS</button>
+          <button data-chart="humidity">PÁRATARTALOM</button>
+        </div>
+        <div class="chart-box">
+          <canvas id="trendChart"></canvas>
+        </div>
+        <div class="chart-legend">
+          <span><i class="outdoor-line"></i>Kültéri hőmérséklet</span>
+          <span><i class="indoor-line"></i>Beltéri hőmérséklet</span>
+        </div>
+      </section>
+
+      <section class="panel forecast-panel">
+        <div class="panel-title">7 NAPOS ELŐREJELZÉS</div>
+        <div id="forecastCards" class="forecast-cards"></div>
+        <div class="forecast-footer">RÉSZLETES ELŐREJELZÉS →</div>
+      </section>
+
+      <section class="panel radar-panel">
         <div class="radar-head">
-          <span>ÉLŐ CSAPADÉKRADAR</span>
-          <button id="radarReload" type="button">↻ Frissítés</button>
+          <div class="panel-title">ÉLŐ CSAPADÉKRADAR</div>
+          <button id="radarReload">↻ Frissítés</button>
         </div>
         <iframe
           id="radarFrame"
-          title="Élő időjárási radar"
+          title="Élő csapadékradar"
           loading="lazy"
           referrerpolicy="no-referrer"
-          src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=%C2%B0C&metricWind=km%2Fh&zoom=8&overlay=radar&product=radar&level=surface&lat=46.52&lon=11.50">
+          src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=%C2%B0C&metricWind=km%2Fh&zoom=7&overlay=radar&product=radar&level=surface&lat=46.52&lon=11.50">
         </iframe>
+      </section>
+
+      <section class="panel alerts-panel">
+        <div class="panel-title">OKOS FIGYELMEZTETÉSEK</div>
+        <div class="alerts-grid">
+          <div class="alert-card green"><span>🙂</span><div><strong id="alertAirTitle">Levegőminőség</strong><em id="alertAirText">Betöltés…</em></div></div>
+          <div class="alert-card yellow"><span>🪟</span><div><strong id="alertVentTitle">Szellőztetés</strong><em id="alertVentText">Betöltés…</em></div></div>
+          <div class="alert-card orange"><span>🌧️</span><div><strong id="alertRainTitle">Csapadék</strong><em id="alertRainText">Betöltés…</em></div></div>
+          <div class="alert-card red"><span>⚠️</span><div><strong id="alertUvTitle">UV-index</strong><em id="alertUvText">Betöltés…</em></div></div>
+          <div class="alert-card blue"><span>🌡️</span><div><strong id="alertNightTitle">Éjszakai hőmérséklet</strong><em id="alertNightText">Betöltés…</em></div></div>
+          <div class="alert-card cyan"><span>🔋</span><div><strong id="alertBatteryTitle">Kültéri modul</strong><em id="alertBatteryText">Betöltés…</em></div></div>
+        </div>
       </section>
     </main>
 
-    <footer>
-      <span>Netatmo + Open-Meteo + Windy Radar</span>
-      <span id="systemTime">Rendszer aktív</span>
+    <footer class="footerbar">
+      <div><span>📍 Helyszín</span><strong>Dolomitok, Dél-Tirol, Olaszország</strong></div>
+      <div><span>⏱ Frissítési intervallum</span><strong>3 perc</strong></div>
+      <div><span>☁️ Adatforrások</span><strong>Netatmo · Open-Meteo · Windy</strong></div>
+      <div><span>📡 Oldal üzemideje</span><strong id="uptime">--</strong></div>
+      <div><span>💚</span><strong>Robert Weather Center</strong></div>
     </footer>
   </div>
 

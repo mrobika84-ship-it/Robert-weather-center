@@ -1,0 +1,24 @@
+ROBERT WEATHER CENTER V5 PREMIUM
+
+1. Csomagold ki a ZIP-et.
+2. A teljes tartalmát töltsd fel a GitHub repository gyökerébe.
+3. Engedd felülírni a meglévő fájlokat.
+4. Commit changes.
+5. Várd meg a Cloudflare zöld deploymentet.
+6. Frissíts Ctrl + F5-tel.
+
+Megmarad:
+- Netatmo Functions
+- KV binding
+- Netatmo tokenek
+- Cloudflare beállítások
+
+Új:
+- prémium, háromoszlopos felület
+- nagy beltéri hőmérséklet
+- harmatpont és abszolút páratartalom
+- 7 napos előrejelzés
+- kapcsolható 24 órás grafikonok
+- élő radar
+- okos figyelmeztetések
+- frissítési visszaszámláló
