@@ -1,3 +1,1 @@
-// Az API ugyanazon a Cloudflare Pages címen fut.
-// Ebbe a fájlba nem kerül titkos kulcs.
-window.RWC_CONFIG = {};
+window.RWC_CONFIG={weather:{latitude:46.517,longitude:11.500}};
