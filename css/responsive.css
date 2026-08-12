@@ -1,4 +1,4 @@
-/* Robert Weather Center V8.3 – responsive layout */
+/* Robert Weather Center V8.4 – responsive layout */
 
 /* Large tablets / small laptops */
 @media (max-width: 1400px){
@@ -461,4 +461,55 @@
 @media (max-width:760px){
   .outdoor-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
   .outdoor-stats .stat{min-height:58px}
+}
+
+/* V8.4 – landscape tablet finomhangolás */
+@media (min-width:1101px) and (max-width:1400px){
+  /* Kültéri ikon ne lógjon bele az alsó adatsorba */
+  .weather-visual{align-self:center;overflow:visible}
+  .weather-icon{
+    font-size:clamp(108px,10.6vw,148px);
+    transform:translateY(-10px);
+  }
+  .outdoor-summary{padding-bottom:8px}
+  .weather-label{margin-top:10px;line-height:1.02}
+
+  /* Beltéri hőmérséklet: mindig a saját kártyán belül maradjon */
+  .indoor-temp-card{
+    padding:12px 8px;
+    min-width:0;
+    overflow:hidden;
+  }
+  .indoor-temp-card strong{
+    width:100%;
+    max-width:100%;
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:3px;
+    box-sizing:border-box;
+    margin-top:10px;
+    padding:0 3px;
+    font-size:clamp(58px,5.25vw,72px);
+    line-height:.94;
+    letter-spacing:-3px;
+    white-space:nowrap;
+    transform:none;
+  }
+  .indoor-temp-card strong > span{
+    display:inline-block;
+    min-width:0;
+    flex:0 1 auto;
+  }
+  .indoor-temp-card strong small{
+    flex:0 0 auto;
+    font-size:.30em;
+    letter-spacing:0;
+  }
+  .indoor-temp-card em{
+    margin-top:12px;
+    font-size:13px;
+    line-height:1.15;
+    text-align:center;
+  }
 }
