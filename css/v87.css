@@ -12,5 +12,9 @@ body.time-night .outdoor-panel::before{filter:saturate(.82) brightness(.58) cont
 body.time-night .outdoor-panel::after{background:linear-gradient(180deg,rgba(2,10,28,.10),rgba(0,5,16,.38))}
 .outdoor-panel .outdoor-stats .stat,.outdoor-panel .astro-row>div{background:rgba(3,14,24,.36)!important;backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px)}
 .outdoor-panel .outdoor-temp,.outdoor-panel .weather-label{text-shadow:0 4px 18px rgba(0,0,0,.88),0 1px 2px rgba(0,0,0,.95)}
-@media (min-width:700px) and (max-width:1400px){.outdoor-panel::before{background-position:center 44%}.outdoor-panel .outdoor-stats .stat{background:rgba(3,14,24,.44)!important}}
-@media (max-width:699px){.panel{background:rgba(4,18,30,.64)!important;backdrop-filter:blur(2px)}.outdoor-panel::before{background-position:52% center;filter:brightness(.70) saturate(.9)}body.time-day .outdoor-panel::before{filter:brightness(.86) saturate(.95)}body.time-sunset .outdoor-panel::before{filter:brightness(.78) saturate(1.05) sepia(.06)}body.time-night .outdoor-panel::before{filter:brightness(.48) saturate(.74)}}
+/* V8.8: letisztult, kisebb napszak ikonok – nincs óriási emoji-hold */
+.weather-icon{font-family:"Segoe UI Symbol","Arial Unicode MS",sans-serif!important;font-size:clamp(72px,7vw,118px)!important;line-height:1!important;filter:drop-shadow(0 0 18px rgba(180,215,255,.24));}
+body.time-night .weather-icon{font-size:clamp(68px,6.4vw,108px)!important;color:#dbe8ff!important;filter:drop-shadow(0 0 22px rgba(130,175,255,.34));}
+.header-weather-icon{font-family:"Segoe UI Symbol","Arial Unicode MS",sans-serif!important;filter:none!important}
+@media (min-width:700px) and (max-width:1400px){.outdoor-panel::before{background-position:center 44%}.outdoor-panel .outdoor-stats .stat{background:rgba(3,14,24,.44)!important}.weather-icon{font-size:clamp(62px,8vw,96px)!important}}
+@media (max-width:699px){.panel{background:rgba(4,18,30,.64)!important;backdrop-filter:blur(2px)}.outdoor-panel::before{background-position:52% center;filter:brightness(.70) saturate(.9)}body.time-day .outdoor-panel::before{filter:brightness(.86) saturate(.95)}body.time-sunset .outdoor-panel::before{filter:brightness(.78) saturate(1.05) sepia(.06)}body.time-night .outdoor-panel::before{filter:brightness(.48) saturate(.74)}.weather-icon{font-size:70px!important}}
