@@ -1,14 +1,10 @@
 const $=id=>document.getElementById(id);
 const fmt=n=>(n===null||n===undefined)?"--":Number(n).toLocaleString("hu-HU",{maximumFractionDigits:1});
-const startedAt=Date.now();
-let refreshDeadline=Date.now()+120000;
-let latestNetatmo=null;
-let latestOutdoor=null;
-
+const startedAt=Date.now();let refreshDeadline=Date.now()+120000;let latestNetatmo=null;let latestOutdoor=null;
 RWC_WIDGETS.mountHeader();RWC_WIDGETS.mountFooter();RWC_OUTDOOR.mount();RWC_INDOOR.mount();RWC_CHARTS.mount();RWC_FORECAST.mount();RWC_RADAR.mount();RWC_ALERTS.mount();
 function moonPhaseName(date=new Date()){const syn=29.53058867,known=new Date("2000-01-06T18:14:00Z"),days=(date-known)/86400000,p=((days%syn)+syn)%syn/syn;if(p<.03||p>.97)return"Újhold";if(p<.22)return"Növő sarló";if(p<.28)return"Első negyed";if(p<.47)return"Növő hold";if(p<.53)return"Telihold";if(p<.72)return"Fogyó hold";if(p<.78)return"Utolsó negyed";return"Fogyó sarló"}
 $("moonPhase").textContent=moonPhaseName();
-function celestialIcon(){const h=new Date().getHours();return h>=7&&h<18?"☀️":h>=18&&h<21?"🌅":"🌙"}
+function celestialIcon(){const h=new Date().getHours();return h>=7&&h<18?"☀":h>=18&&h<21?"◒":"☾"}
 function updateClock(){const now=new Date();$("clock").textContent=now.toLocaleTimeString("hu-HU",{hour:"2-digit",minute:"2-digit"});$("date").textContent=now.toLocaleDateString("hu-HU",{year:"numeric",month:"long",day:"numeric",weekday:"long"});const remain=Math.max(0,refreshDeadline-Date.now());$("nextRefresh").textContent="Következő frissítés: "+Math.floor(remain/60000)+":"+String(Math.floor(remain%60000/1000)).padStart(2,"0");const up=Date.now()-startedAt;$("uptime").textContent=Math.floor(up/86400000)+" nap "+Math.floor(up%86400000/3600000)+" óra "+Math.floor(up%3600000/60000)+" perc";const h=now.getHours();document.body.classList.remove("time-day","time-sunset","time-night");document.body.classList.add(h>=7&&h<18?"time-day":h>=18&&h<21?"time-sunset":"time-night");const ci=celestialIcon();if($("weatherIcon"))$("weatherIcon").textContent=ci;if($("headerWeatherIcon"))$("headerWeatherIcon").textContent=ci}
 updateClock();setInterval(updateClock,1000);
 function setConnection(type,text){$("connection").className="status "+type;$("connection").textContent="● "+text}
