@@ -1,0 +1,96 @@
+/* Robert Weather Center V8.7 Dynamic – glass + napszakos kültéri háttér */
+
+/* A fő panelek mögött látszódjon a Dolomitok háttér, de az adatok maradjanak olvashatók. */
+.panel{
+  background:rgba(4,18,30,.64)!important;
+  backdrop-filter:blur(3px) saturate(112%);
+  -webkit-backdrop-filter:blur(3px) saturate(112%);
+}
+.indoor-small,.micro-card,.forecast-card,.alert-card{
+  background:rgba(8,25,39,.74)!important;
+}
+
+/* Kültéri panel: saját Dolomitok kép, napszak szerint hangolva. */
+.outdoor-panel{
+  isolation:isolate;
+  position:relative;
+  overflow:hidden;
+  background:rgba(3,15,26,.44)!important;
+}
+.outdoor-panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background-image:url("../assets/dolomites-dashboard-bg.png");
+  background-position:center 48%;
+  background-size:cover;
+  background-repeat:no-repeat;
+  filter:saturate(1.06) brightness(.90) contrast(1.04);
+  transform:scale(1.01);
+}
+.outdoor-panel::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  width:auto;
+  height:auto;
+  left:0;
+  top:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(2,10,18,.06),rgba(2,10,18,.34));
+}
+
+/* Nappal világos, tiszta hegyvidéki hangulat. */
+body.time-day .outdoor-panel::before{
+  filter:saturate(1.06) brightness(1.04) contrast(1.01);
+}
+body.time-day .outdoor-panel::after{
+  background:linear-gradient(180deg,rgba(4,18,29,.03),rgba(3,12,20,.25));
+}
+
+/* Naplementében melegebb, arany-narancs tónus. */
+body.time-sunset .outdoor-panel::before{
+  filter:saturate(1.20) brightness(.98) contrast(1.04) sepia(.08);
+}
+body.time-sunset .outdoor-panel::after{
+  background:linear-gradient(90deg,rgba(255,126,32,.04),rgba(8,18,32,.16) 58%,rgba(14,6,30,.28));
+}
+
+/* Éjszaka sötétebb, kékes háttér a jó olvashatóságért. */
+body.time-night .outdoor-panel::before{
+  filter:saturate(.76) brightness(.47) contrast(1.10) hue-rotate(4deg);
+}
+body.time-night .outdoor-panel::after{
+  background:linear-gradient(180deg,rgba(2,10,28,.20),rgba(0,5,16,.58));
+}
+
+/* Az alsó kültéri adatok kapjanak külön üvegkártyákat. */
+.outdoor-panel .outdoor-stats .stat,
+.outdoor-panel .astro-row>div{
+  background:rgba(3,14,24,.48)!important;
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+}
+.outdoor-panel .outdoor-temp,
+.outdoor-panel .weather-label{
+  text-shadow:0 4px 18px rgba(0,0,0,.88),0 1px 2px rgba(0,0,0,.95);
+}
+
+/* Tablet: maradjon jól látható a kép, ne váljon zsúfolttá. */
+@media (min-width:700px) and (max-width:1400px){
+  .outdoor-panel::before{background-position:center 44%}
+  .outdoor-panel .outdoor-stats .stat{background:rgba(3,14,24,.58)!important}
+}
+
+/* Telefon: a háttér kevésbé legyen mozgalmas a szöveg mögött. */
+@media (max-width:699px){
+  .panel{background:rgba(4,18,30,.76)!important;backdrop-filter:blur(2px)}
+  .outdoor-panel::before{background-position:52% center;filter:brightness(.62) saturate(.9)}
+  body.time-day .outdoor-panel::before{filter:brightness(.78) saturate(.95)}
+  body.time-sunset .outdoor-panel::before{filter:brightness(.70) saturate(1.05) sepia(.06)}
+  body.time-night .outdoor-panel::before{filter:brightness(.38) saturate(.70)}
+}
