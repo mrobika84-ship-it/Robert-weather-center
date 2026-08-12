@@ -1,4 +1,4 @@
-/* Robert Weather Center V8.4 – responsive layout */
+/* Robert Weather Center V8.5 – responsive layout */
 
 /* Large tablets / small laptops */
 @media (max-width: 1400px){
@@ -463,7 +463,7 @@
   .outdoor-stats .stat{min-height:58px}
 }
 
-/* V8.4 – landscape tablet finomhangolás */
+/* V8.5 – landscape tablet finomhangolás */
 @media (min-width:1101px) and (max-width:1400px){
   /* Kültéri ikon ne lógjon bele az alsó adatsorba */
   .weather-visual{align-self:center;overflow:visible}
