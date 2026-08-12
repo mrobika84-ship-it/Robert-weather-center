@@ -22,7 +22,7 @@ window.RWC_OUTDOOR = {
       <div class="astro-row">
         <div><span>🌅 NAPFELKELTE</span><strong id="sunrise">--:--</strong></div>
         <div><span>🌇 NAPNYUGTA</span><strong id="sunset">--:--</strong></div>
-        <div><span>🌙 HOLD FÁZIS</span><strong id="moonPhase">--</strong></div>
+        <div><span><span id="moonPhaseIcon">🌙</span> HOLD FÁZIS</span><strong id="moonPhase">--</strong></div>
         <div><span>☀️ FÉNYERŐ</span><strong id="brightness">--%</strong></div>
         <div><span>👁 LÁTHATÓSÁG</span><strong id="visibility">-- km</strong></div>
         <div><span>🍃 LÉGMINŐSÉG</span><strong id="airQuality">--</strong></div>
