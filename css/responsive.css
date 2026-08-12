@@ -1,4 +1,4 @@
-/* Robert Weather Center V8.1 – responsive layout */
+/* Robert Weather Center V8.3 – responsive layout */
 
 /* Large tablets / small laptops */
 @media (max-width: 1400px){
@@ -412,101 +412,53 @@
   *{animation:none!important;scroll-behavior:auto!important}
 }
 
-/* V8.2 – landscape tablet finomhangolás (pl. 1280x800 / 1366x768)
-   A kültéri hőmérséklet alatti adatok két áttekinthető sorban jelennek meg. */
-@media (min-width: 1101px) and (max-width: 1366px){
-  .outdoor-panel{
-    padding:10px 12px;
-  }
 
-  .outdoor-main{
-    grid-template-columns:.78fr 1.22fr;
-    gap:8px;
-  }
+/* V8.3 – landscape tablet: tiszta kültéri információs hierarchia */
+@media (min-width: 1101px) and (max-width: 1400px){
+  .outdoor-panel{padding:10px 12px}
+  .outdoor-main{grid-template-columns:.72fr 1.28fr;gap:10px;min-height:0}
+  .weather-icon{font-size:clamp(118px,12vw,168px)}
+  .outdoor-summary{align-self:center;padding-bottom:3px}
+  .outdoor-temp{font-size:clamp(74px,8vw,104px);line-height:.88;letter-spacing:-4px}
+  .weather-label{font-size:clamp(25px,2.7vw,35px);line-height:1;margin-top:6px}
 
-  .weather-icon{
-    font-size:clamp(120px,13vw,175px);
-  }
-
-  .outdoor-temp{
-    font-size:clamp(70px,8vw,102px);
-    line-height:.88;
-  }
-
-  .weather-label{
-    font-size:clamp(24px,2.6vw,34px);
-    margin-top:5px;
-  }
-
-  .feels{
-    margin-top:6px;
-    font-size:14px;
-  }
-
+  /* 8 egyforma mező: 4 + 4. Nincs több egymásra csúszó szöveg. */
   .outdoor-stats{
+    display:grid;
     grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:5px;
-    padding:5px 0;
+    gap:6px;
+    padding:7px 0 6px;
     border-top:1px solid rgba(255,255,255,.12);
     border-bottom:1px solid rgba(255,255,255,.12);
   }
-
-  .outdoor-stats .stat{
-    min-width:0;
-    padding:6px 7px;
-    border:1px solid rgba(255,255,255,.075);
-    border-radius:8px;
-    background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
-    text-align:center;
-  }
-
+  .outdoor-stats .stat,
   .outdoor-stats .stat:last-child{
-    border-right:1px solid rgba(255,255,255,.075);
-  }
-
-  .outdoor-stats .stat span{
-    font-size:8px;
-    letter-spacing:.45px;
-    white-space:nowrap;
-  }
-
-  .outdoor-stats .stat strong{
-    font-size:15px;
-    line-height:1.05;
-    margin-top:3px;
-    white-space:nowrap;
-  }
-
-  .outdoor-stats .stat em{
-    font-size:8px;
-    line-height:1;
-    margin-top:2px;
-    white-space:nowrap;
-  }
-
-  /* A második sor 3 eleme szépen kitölti a teljes szélességet. */
-  .outdoor-stats .stat:nth-child(5){grid-column:1 / 2}
-  .outdoor-stats .stat:nth-child(6){grid-column:2 / 3}
-  .outdoor-stats .stat:nth-child(7){grid-column:3 / 5}
-
-  .astro-row{
-    margin-top:5px;
-  }
-
-  .astro-row>div{
-    padding:5px 6px;
+    min-width:0;
+    min-height:47px;
+    padding:6px 5px;
+    border:1px solid rgba(110,190,255,.13);
+    border-radius:8px;
+    background:linear-gradient(145deg,rgba(20,48,73,.52),rgba(7,22,36,.50));
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
     text-align:center;
+    overflow:hidden;
   }
+  .outdoor-stats .stat span{font-size:7.5px;line-height:1.05;letter-spacing:.45px;white-space:nowrap}
+  .outdoor-stats .stat strong{font-size:14px;line-height:1.05;margin-top:4px;white-space:nowrap}
+  .outdoor-stats .stat em{font-size:7.5px;line-height:1;margin-top:2px;white-space:nowrap}
+  .outdoor-stats .stat-feels strong{color:var(--orange)}
 
-  .astro-row span{
-    font-size:7.5px;
-    letter-spacing:.35px;
-    white-space:nowrap;
-  }
+  .astro-row{margin-top:5px;grid-template-columns:repeat(6,minmax(0,1fr))}
+  .astro-row>div{padding:5px 4px;text-align:center;min-width:0}
+  .astro-row span{font-size:7px;letter-spacing:.25px;white-space:nowrap}
+  .astro-row strong{font-size:10.5px;line-height:1.05;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
 
-  .astro-row strong{
-    font-size:11px;
-    margin-top:2px;
-    white-space:nowrap;
-  }
+/* Telefonon is 2×4 marad a kültéri adatrács, nagyobb olvashatósággal. */
+@media (max-width:760px){
+  .outdoor-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .outdoor-stats .stat{min-height:58px}
 }

@@ -7,10 +7,10 @@ window.RWC_OUTDOOR = {
         <div class="outdoor-summary">
           <div class="outdoor-temp"><span id="outTemp">--</span><small> °C</small></div>
           <div id="weatherLabel" class="weather-label">--</div>
-          <div class="feels"><span>🌡 HŐÉRZET</span><strong id="feelsLike">-- °C</strong></div>
         </div>
       </div>
       <div class="outdoor-stats">
+        <div class="stat stat-feels"><span>🌡 HŐÉRZET</span><strong id="feelsLike">-- °C</strong></div>
         <div class="stat"><span>MIN.</span><strong id="tempMin">-- °C</strong></div>
         <div class="stat"><span>MAX.</span><strong id="tempMax">-- °C</strong></div>
         <div class="stat"><span>SZÉL</span><strong id="windSpeed">-- km/h</strong><em id="windDirection">--</em></div>
