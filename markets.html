@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Robert Market Center</title>
+<style>
+html,body{margin:0;width:100%;height:100%;background:#07111f;color:white;font-family:Arial,sans-serif}body{overflow:hidden}.wrap{height:100vh;padding:18px;box-sizing:border-box;display:grid;grid-template-rows:auto 1fr auto;gap:14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;min-height:0}.card{border:1px solid #243247;border-radius:22px;background:#0d1828;overflow:hidden;display:flex;flex-direction:column}.head{padding:18px}.name{font-size:30px;font-weight:800}.ticker{color:#8ca0ba;margin-top:5px}.body{flex:1;padding:18px;display:flex;flex-direction:column;justify-content:center}.price{font-size:64px;font-weight:800}.change{font-size:34px;font-weight:700;margin-top:12px}.up{color:#45e38a}.down{color:#ff6f7d}.flat{color:#c5d0df}.meta{color:#8ca0ba;margin-top:18px;line-height:1.6}iframe{border:0;width:100%;height:100%;min-height:300px}footer{display:flex;justify-content:space-between;color:#8192a8;font-size:13px}@media(max-width:900px){body{overflow:auto}.wrap{height:auto}.grid{grid-template-columns:1fr}.card{min-height:320px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>Piacok</h1></header>
+<main class="grid">
+<section class="card"><div class="head"><div class="name">VWCE</div><div class="ticker">Vanguard FTSE All-World UCITS ETF</div></div><iframe src="https://s.tradingview.com/widgetembed/?symbol=XETR%3AVWCE&interval=1&theme=dark&style=1&locale=hu"></iframe></section>
+<section class="card"><div class="head"><div class="name">AMD</div><div class="ticker">Advanced Micro Devices</div></div><iframe src="https://s.tradingview.com/widgetembed/?symbol=NASDAQ%3AAMD&interval=1&theme=dark&style=1&locale=hu"></iframe></section>
+<section class="card"><div class="head"><div class="name">BATON</div><div class="ticker">Solana</div></div><div class="body"><div id="price" class="price">—</div><div id="change" class="change flat">—</div><div id="meta" class="meta">Betöltés…</div></div></section>
+</main>
+<footer><span>Frissítés: 10 mp</span><span id="updated">—</span></footer>
+</div>
+<script>
+const ADDRESS='Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump';
+const START_KEY='marketsStarted';
+const PERIOD=60000;
+async function baton(){try{const r=await fetch('https://api.dexscreener.com/token-pairs/v1/solana/'+ADDRESS,{cache:'no-store'});const a=await r.json();const p=[...a].sort((x,y)=>(Number(y.liquidity?.usd)||0)-(Number(x.liquidity?.usd)||0))[0];const price=Number(p.priceUsd);const ch=Number(p.priceChange?.h24);document.getElementById('price').textContent='$'+price.toLocaleString('hu-HU',{minimumFractionDigits:4,maximumFractionDigits:8});const c=document.getElementById('change');c.textContent=(ch>0?'+':'')+ch.toFixed(2).replace('.',',')+'% / 24h';c.className='change '+(ch>0?'up':ch<0?'down':'flat');document.getElementById('meta').textContent='Market cap: $'+Math.round(Number(p.marketCap||p.fdv||0)).toLocaleString('hu-HU')+' · Likviditás: $'+Math.round(Number(p.liquidity?.usd||0)).toLocaleString('hu-HU');document.getElementById('updated').textContent='Utolsó frissítés: '+new Date().toLocaleTimeString('hu-HU')}catch(e){document.getElementById('meta').textContent='Adatkapcsolati hiba'}}
+let started=Number(sessionStorage.getItem(START_KEY));if(!started||Date.now()-started>75000){started=Date.now();sessionStorage.setItem(START_KEY,String(started))}setTimeout(()=>{sessionStorage.removeItem(START_KEY);location.replace('index.html')},Math.max(0,PERIOD-(Date.now()-started)));
+baton();setTimeout(()=>location.reload(),10000);
+</script>
+</body>
+</html>
