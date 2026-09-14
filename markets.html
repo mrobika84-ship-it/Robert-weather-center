@@ -6,198 +6,61 @@
 <meta name="theme-color" content="#07111f">
 <title>Robert Market Center</title>
 <style>
-:root{
-  --bg:#07111f;--card:#0d1828;--line:#243247;--muted:#8ca0ba;
-  --up:#45e38a;--down:#ff6f7d;--text:#fff
-}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-body{overflow:hidden}
-.wrap{height:100vh;padding:18px;display:grid;grid-template-rows:auto 1fr auto;gap:14px}
-header{display:flex;align-items:end;justify-content:space-between}
-h1{margin:0;font-size:34px}
-.sub{color:var(--muted);font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;min-height:0}
-.card{border:1px solid var(--line);border-radius:22px;background:var(--card);padding:20px;display:flex;flex-direction:column;min-width:0}
-.name{font-size:34px;font-weight:800}
-.ticker{color:var(--muted);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.price{font-size:58px;font-weight:800;margin-top:26px;line-height:1}
-.change{font-size:27px;font-weight:700;margin-top:10px}
-.sep{height:1px;background:var(--line);margin:22px 0}
-.label{font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-.pnl{font-size:35px;font-weight:800;margin-top:6px}
-.details{margin-top:10px;font-size:16px;line-height:1.6;color:#c7d1df}
-.meta{margin-top:auto;color:var(--muted);font-size:14px;line-height:1.5;padding-top:18px}
-.up{color:var(--up)}
-.down{color:var(--down)}
-.flat{color:#c5d0df}
-.error{color:#ffb0b7}
-footer{display:flex;justify-content:space-between;color:#8192a8;font-size:13px}
-@media(max-width:900px){
-  body{overflow:auto}
-  .wrap{height:auto}
-  .grid{grid-template-columns:1fr}
-  .card{min-height:370px}
-}
+:root{--bg:#07111f;--card:#0d1828;--line:#243247;--muted:#8ca0ba;--up:#45e38a;--down:#ff6f7d;--text:#fff}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+body{overflow:hidden}.wrap{height:100vh;padding:18px;display:grid;grid-template-rows:auto 1fr auto;gap:14px}
+header{display:flex;align-items:end;justify-content:space-between}h1{margin:0;font-size:34px}.sub{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;min-height:0}.card{border:1px solid var(--line);border-radius:22px;background:var(--card);padding:20px;display:flex;flex-direction:column;min-width:0}
+.name{font-size:34px;font-weight:800}.ticker{color:var(--muted);margin-top:5px}.price{font-size:58px;font-weight:800;margin-top:26px;line-height:1}
+.change{font-size:27px;font-weight:700;margin-top:10px}.sep{height:1px;background:var(--line);margin:22px 0}.label{font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.pnl{font-size:35px;font-weight:800;margin-top:6px}.details{margin-top:10px;font-size:16px;line-height:1.6;color:#c7d1df}.meta{margin-top:auto;color:var(--muted);font-size:14px;line-height:1.5;padding-top:18px}
+.up{color:var(--up)}.down{color:var(--down)}.flat{color:#c5d0df}.error{color:#ffb0b7}footer{display:flex;justify-content:space-between;color:#8192a8;font-size:13px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <div>
-      <h1>Piacok · Saját portfólió</h1>
-      <div class="sub">Árfolyam + saját profit / veszteség</div>
-    </div>
-    <div class="sub">Frissítés: 10 mp</div>
-  </header>
-
-  <main class="grid">
-    <section class="card">
-      <div class="name">VWCE</div>
-      <div class="ticker">Vanguard FTSE All-World UCITS ETF · Xetra</div>
-      <div id="vwcePrice" class="price">—</div>
-      <div id="vwceChange" class="change flat">—</div>
-      <div class="sep"></div>
-      <div class="label">Saját eredmény</div>
-      <div id="vwcePnl" class="pnl flat">—</div>
-      <div id="vwceDetails" class="details">1,15 db · átlagos vétel €169,84</div>
-      <div id="vwceMeta" class="meta">Betöltés…</div>
-    </section>
-
-    <section class="card">
-      <div class="name">AMD</div>
-      <div class="ticker">Advanced Micro Devices · NASDAQ</div>
-      <div id="amdPrice" class="price">—</div>
-      <div id="amdChange" class="change flat">—</div>
-      <div class="sep"></div>
-      <div class="label">Saját eredmény</div>
-      <div id="amdPnl" class="pnl flat">—</div>
-      <div id="amdDetails" class="details">1,20 db · átlagos vétel $468,788</div>
-      <div id="amdMeta" class="meta">Betöltés…</div>
-    </section>
-
-    <section class="card">
-      <div class="name">BATON</div>
-      <div class="ticker">Solana</div>
-      <div id="batonPrice" class="price">—</div>
-      <div id="batonChange" class="change flat">—</div>
-      <div class="sep"></div>
-      <div class="label">Saját eredmény</div>
-      <div id="batonPnl" class="pnl flat">—</div>
-      <div id="batonDetails" class="details">50 142,51 db · átlagos vétel $0,0061677</div>
-      <div id="batonMeta" class="meta">Betöltés…</div>
-    </section>
-  </main>
-
-  <footer>
-    <span>Zöld = profit · piros = veszteség</span>
-    <span id="updated">—</span>
-  </footer>
+<header><div><h1>Piacok · Saját portfólió</h1><div class="sub">Árfolyam + saját profit / veszteség</div></div><div class="sub">Frissítés: 10 mp</div></header>
+<main class="grid">
+<section class="card"><div class="name">VWCE</div><div class="ticker">Vanguard FTSE All-World UCITS ETF</div><div id="vwcePrice" class="price">—</div><div id="vwceChange" class="change flat">—</div><div class="sep"></div><div class="label">Saját eredmény</div><div id="vwcePnl" class="pnl flat">—</div><div id="vwceDetails" class="details">1,15 db · vétel €169,84</div><div id="vwceMeta" class="meta">Betöltés…</div></section>
+<section class="card"><div class="name">AMD</div><div class="ticker">Advanced Micro Devices · NASDAQ</div><div id="amdPrice" class="price">—</div><div id="amdChange" class="change flat">—</div><div class="sep"></div><div class="label">Saját eredmény</div><div id="amdPnl" class="pnl flat">—</div><div id="amdDetails" class="details">1,20 db · vétel $468,788</div><div id="amdMeta" class="meta">Betöltés…</div></section>
+<section class="card"><div class="name">BATON</div><div class="ticker">Solana</div><div id="batonPrice" class="price">—</div><div id="batonChange" class="change flat">—</div><div class="sep"></div><div class="label">Saját eredmény</div><div id="batonPnl" class="pnl flat">—</div><div id="batonDetails" class="details">50 142,51 db · vétel $0,0061677</div><div id="batonMeta" class="meta">Betöltés…</div></section>
+</main>
+<footer><span>Zöld = profit · piros = veszteség</span><span id="updated">—</span></footer>
 </div>
-
 <script>
-const POSITIONS = {
-  vwce:{qty:1.15, avg:169.84, currency:'EUR', symbol:'VWCE.DE'},
-  amd:{qty:1.20, avg:468.788, currency:'USD', symbol:'AMD'},
-  baton:{qty:50142.507587, avg:0.0061677, currency:'USD'}
-};
-
-const BATON_ADDRESS='Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump';
-
-function cls(v){return v>0?'up':v<0?'down':'flat'}
-function num(v,min=2,max=2){return Number(v).toLocaleString('hu-HU',{minimumFractionDigits:min,maximumFractionDigits:max})}
-function money(v,c){
-  const s=v>0?'+':v<0?'−':'';
-  const a=Math.abs(v);
-  return c==='EUR' ? s+'€'+num(a) : s+'$'+num(a);
+const PROXY='https://market-prices.mrobika84.workers.dev/';
+const BATON='Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump';
+const P={vwce:{qty:1.15,avg:169.84,c:'EUR'},amd:{qty:1.2,avg:468.788,c:'USD'},baton:{qty:50142.507587,avg:0.0061677,c:'USD'}};
+const nf=(v,a=2,b=2)=>Number(v).toLocaleString('hu-HU',{minimumFractionDigits:a,maximumFractionDigits:b});
+const cls=v=>v>0?'up':v<0?'down':'flat';
+function money(v,c){return(v>0?'+':v<0?'−':'')+(c==='EUR'?'€':'$')+nf(Math.abs(v))}
+function render(k,price,chg){
+ const p=P[k],pnl=(price-p.avg)*p.qty,pct=(price/p.avg-1)*100,val=price*p.qty,sym=p.c==='EUR'?'€':'$';
+ document.getElementById(k+'Price').textContent=sym+nf(price,k==='baton'?4:2,k==='baton'?8:2);
+ const ce=document.getElementById(k+'Change');ce.textContent=(chg>0?'+':'')+nf(chg)+'% '+(k==='baton'?'/ 24h':'ma');ce.className='change '+cls(chg);
+ const pe=document.getElementById(k+'Pnl');pe.textContent=money(pnl,p.c)+' ('+(pct>0?'+':'')+nf(pct)+'%)';pe.className='pnl '+cls(pnl);
+ document.getElementById(k+'Details').textContent='Érték: '+sym+nf(val)+' · '+nf(p.qty,k==='baton'?2:2,k==='baton'?2:2)+' db · vétel '+sym+nf(p.avg,k==='baton'?7:3,k==='baton'?7:3);
 }
-function pct(v){return (v>0?'+':'')+num(v,2,2)+'%'}
-function setClass(el,base,v){el.className=base+' '+cls(v)}
-
-async function fetchYahoo(symbol){
-  const u='https://query1.finance.yahoo.com/v8/finance/chart/'+encodeURIComponent(symbol)+'?interval=1m&range=1d&includePrePost=true';
-  const r=await fetch(u,{cache:'no-store'});
-  if(!r.ok) throw new Error('Yahoo HTTP '+r.status);
-  const j=await r.json();
-  const x=j?.chart?.result?.[0];
-  if(!x) throw new Error('Nincs árfolyamadat');
-  const m=x.meta||{};
-  let price=Number(m.regularMarketPrice);
-  if(!Number.isFinite(price)){
-    const closes=x?.indicators?.quote?.[0]?.close||[];
-    for(let i=closes.length-1;i>=0;i--){if(Number.isFinite(Number(closes[i]))){price=Number(closes[i]);break}}
-  }
-  const prev=Number(m.chartPreviousClose ?? m.previousClose);
-  const changePct=Number.isFinite(prev)&&prev!==0 ? (price/prev-1)*100 : NaN;
-  return {price,changePct,currency:m.currency||'',exchange:m.exchangeName||''};
+async function stock(k,symbol){
+ const m=document.getElementById(k+'Meta');
+ try{
+  const r=await fetch(PROXY+'?symbol='+symbol+'&t='+Date.now(),{cache:'no-store'});
+  const q=await r.json();if(!r.ok||!Number.isFinite(Number(q.price)))throw new Error(q.error||'Nincs adat');
+  render(k,Number(q.price),Number(q.changePercent));
+  m.className='meta';m.textContent='Forrás: Yahoo Finance · '+(q.exchange||symbol)+(q.marketState?' · '+q.marketState:'');
+ }catch(e){m.className='meta error';m.textContent='Árfolyamadat hiba · '+e.message}
 }
-
-function renderPosition(prefix,price,dayChange,pos){
-  const value=price*pos.qty;
-  const pnl=(price-pos.avg)*pos.qty;
-  const pnlPct=(price/pos.avg-1)*100;
-  const priceEl=document.getElementById(prefix+'Price');
-  const chEl=document.getElementById(prefix+'Change');
-  const pnlEl=document.getElementById(prefix+'Pnl');
-  const detailsEl=document.getElementById(prefix+'Details');
-
-  priceEl.textContent=(pos.currency==='EUR'?'€':'$')+num(price,2, prefix==='baton'?8:2);
-  chEl.textContent=Number.isFinite(dayChange)?pct(dayChange)+' ma':'—';
-  setClass(chEl,'change',dayChange||0);
-
-  pnlEl.textContent=money(pnl,pos.currency)+' ('+pct(pnlPct)+')';
-  setClass(pnlEl,'pnl',pnl);
-
-  detailsEl.textContent=
-    'Érték: '+(pos.currency==='EUR'?'€':'$')+num(value)+
-    ' · '+num(pos.qty, prefix==='baton'?2:2, prefix==='baton'?2:2)+' db'+
-    ' · vétel '+(pos.currency==='EUR'?'€':'$')+num(pos.avg,prefix==='baton'?7:3,prefix==='baton'?7:3);
+async function baton(){
+ const m=document.getElementById('batonMeta');
+ try{
+  const r=await fetch('https://api.dexscreener.com/token-pairs/v1/solana/'+BATON+'?t='+Date.now(),{cache:'no-store'});
+  const a=await r.json();const q=[...a].sort((x,y)=>(+y.liquidity?.usd||0)-(+x.liquidity?.usd||0))[0];
+  render('baton',+q.priceUsd,+q.priceChange?.h24);
+  m.className='meta';m.textContent='Market cap: $'+Math.round(+(q.marketCap||q.fdv||0)).toLocaleString('hu-HU')+' · Likviditás: $'+Math.round(+q.liquidity?.usd||0).toLocaleString('hu-HU');
+ }catch(e){m.className='meta error';m.textContent='BATON adatkapcsolati hiba · '+e.message}
 }
-
-async function updateStock(prefix,pos){
-  const meta=document.getElementById(prefix+'Meta');
-  try{
-    const q=await fetchYahoo(pos.symbol);
-    renderPosition(prefix,q.price,q.changePct,pos);
-    meta.className='meta';
-    meta.textContent='Forrás: Yahoo Finance · '+(q.exchange||pos.symbol);
-  }catch(e){
-    meta.className='meta error';
-    meta.textContent='Árfolyamadat hiba · '+e.message;
-  }
-}
-
-async function updateBaton(){
-  const meta=document.getElementById('batonMeta');
-  try{
-    const r=await fetch('https://api.dexscreener.com/token-pairs/v1/solana/'+BATON_ADDRESS,{cache:'no-store'});
-    if(!r.ok) throw new Error('DexScreener HTTP '+r.status);
-    const a=await r.json();
-    const p=[...a].sort((x,y)=>(Number(y.liquidity?.usd)||0)-(Number(x.liquidity?.usd)||0))[0];
-    if(!p) throw new Error('Nincs páradat');
-    const price=Number(p.priceUsd);
-    const ch=Number(p.priceChange?.h24);
-    renderPosition('baton',price,ch,POSITIONS.baton);
-    meta.className='meta';
-    meta.textContent='Market cap: $'+Math.round(Number(p.marketCap||p.fdv||0)).toLocaleString('hu-HU')+
-      ' · Likviditás: $'+Math.round(Number(p.liquidity?.usd||0)).toLocaleString('hu-HU');
-  }catch(e){
-    meta.className='meta error';
-    meta.textContent='BATON adatkapcsolati hiba · '+e.message;
-  }
-}
-
-async function refresh(){
-  await Promise.allSettled([
-    updateStock('vwce',POSITIONS.vwce),
-    updateStock('amd',POSITIONS.amd),
-    updateBaton()
-  ]);
-  document.getElementById('updated').textContent='Utolsó frissítés: '+new Date().toLocaleTimeString('hu-HU');
-}
-
-refresh();
-setInterval(refresh,10000);
+async function refresh(){await Promise.allSettled([stock('vwce','VWCE'),stock('amd','AMD'),baton()]);document.getElementById('updated').textContent='Utolsó frissítés: '+new Date().toLocaleTimeString('hu-HU')}
+refresh();setInterval(refresh,10000);
 </script>
 </body>
 </html>
