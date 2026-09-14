@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06101a">
+<title>Robert Tablet Display</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#06101a}iframe{display:block;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<iframe id="screen" src="index.html" allow="fullscreen"></iframe>
+<script>
+const pages=['index.html','markets.html'];
+let current=0;
+setInterval(()=>{current=(current+1)%pages.length;document.getElementById('screen').src=pages[current]},60000);
+</script>
+</body>
+</html>
