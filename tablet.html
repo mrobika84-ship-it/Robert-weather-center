@@ -1,6 +1,24 @@
-<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta http-equiv="Cache-Control" content="no-store"><title>Róbert kijelző</title><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#06101a}iframe{width:100%;height:100%;border:0;display:block}</style></head><body><iframe id="screen" allow="fullscreen"></iframe><script>
-const pages=['https://robert-weather-center.pages.dev/','markets.html','dogs.html'];let current=0,timer;
-function urlFor(i){const u=pages[i];return u+(u.includes('?')?'&':'?')+'v6='+Date.now()}
-function next(){current=(current+1)%pages.length;document.getElementById('screen').src=urlFor(current);timer=setTimeout(next,15000)}
-document.getElementById('screen').src=urlFor(0);timer=setTimeout(next,15000);
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta http-equiv="Cache-Control" content="no-store"><title>Róbert kijelző</title><style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#06101a}
+.screen{position:fixed;inset:0;width:100%;height:100%;border:0;display:block;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .6s ease}
+.screen.active{opacity:1;visibility:visible;pointer-events:auto;z-index:2}
+</style></head><body>
+<iframe class="screen active" id="weather" title="Időjárás" allow="fullscreen"></iframe>
+<iframe class="screen" id="markets" title="Befektetések" allow="fullscreen"></iframe>
+<iframe class="screen" id="dogs" title="Happy és Honey" allow="fullscreen"></iframe>
+<script>
+const frames=[
+  {el:document.getElementById('weather'),url:'https://robert-weather-center.pages.dev/'},
+  {el:document.getElementById('markets'),url:'markets.html'},
+  {el:document.getElementById('dogs'),url:'dogs.html'}
+];
+const stamp=Date.now();
+frames.forEach(f=>{f.el.src=f.url+(f.url.includes('?')?'&':'?')+'v7='+stamp});
+let current=0;
+function next(){
+  frames[current].el.classList.remove('active');
+  current=(current+1)%frames.length;
+  frames[current].el.classList.add('active');
+}
+setInterval(next,15000);
 </script></body></html>
