@@ -3,5 +3,5 @@
 <body><iframe id="screen" src="https://robert-weather-center.pages.dev/?screen=weather" allow="fullscreen"></iframe><script>
 const pages=['https://robert-weather-center.pages.dev/','markets.html','dogs.html'];let current=0;
 function showPage(){const url=pages[current],separator=url.includes('?')?'&':'?';document.getElementById('screen').src=url+separator+'tablet3='+Date.now()}
-setInterval(()=>{current=(current+1)%pages.length;showPage()},30000);
+setInterval(()=>{current=(current+1)%pages.length;showPage()},15000);
 </script></body></html>
