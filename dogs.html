@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#182217"><title>Happy & Honey</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#182217;font-family:Segoe UI,Arial,sans-serif}
+body:before{content:"";position:fixed;inset:-45px;background:url('assets/happy-honey.jpg') center/cover no-repeat;filter:blur(34px) brightness(.64) saturate(1.15);transform:scale(1.08)}
+body:after{content:"";position:fixed;inset:0;background:linear-gradient(90deg,rgba(12,18,10,.58),transparent 27%,transparent 73%,rgba(12,18,10,.58)),linear-gradient(0deg,rgba(8,13,7,.48),transparent 40%,rgba(8,13,7,.18))}
+.photo{position:absolute;z-index:1;inset:0;background:url('assets/happy-honey.jpg') center 52%/auto 164% no-repeat;filter:saturate(1.08) contrast(1.03);box-shadow:0 0 85px rgba(0,0,0,.7)}
+.names{position:absolute;z-index:2;left:50%;bottom:38px;transform:translateX(-50%);width:min(880px,86vw);display:flex;justify-content:space-between;align-items:end;pointer-events:none}
+.name{min-width:240px;text-align:center;color:white;font-size:48px;font-weight:800;letter-spacing:.5px;text-shadow:0 4px 20px rgba(0,0,0,.85);padding:10px 28px 12px;border-radius:999px;background:rgba(10,16,9,.36);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px)}
+@media(max-width:800px){.photo{background-size:auto 150%}.names{bottom:24px}.name{font-size:34px;min-width:170px}}
+</style></head><body><div class="photo"></div><div class="names"><div class="name">Happy</div><div class="name">Honey</div></div></body></html>
