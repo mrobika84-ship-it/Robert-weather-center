@@ -33,6 +33,6 @@ function drawChart(k){const canvas=document.getElementById(k+'Chart');if(!canvas
 window.addEventListener('resize',()=>{drawChart('vwce');drawChart('amd');drawChart('sec0')});
 async function stock(k,symbol){const m=document.getElementById(k+'Meta');try{const r=await fetch(PROXY+'?symbol='+symbol+'&t='+Date.now(),{cache:'no-store'}),q=await r.json();if(!r.ok||!Number.isFinite(+q.price))throw Error(q.error||'Nincs adat');render(k,+q.price,+q.changePercent);m.className='meta';m.textContent='Árfolyam: Yahoo Finance · '+(q.exchange||symbol)}catch(e){m.className='meta error';m.textContent='Árfolyamadat hiba · '+e.message}}
 async function fx(){try{const r=await fetch('https://api.frankfurter.app/latest?from=USD&to=EUR',{cache:'no-store'}),q=await r.json();if(+q.rates?.EUR)usdEur=+q.rates.EUR}catch(e){}}
-async function refresh(){await fx();await Promise.allSettled([stock('vwce','VWCE'),stock('amd','AMD'),stock('sec0','SEME.MI')]);document.getElementById('updated').textContent='Utolsó frissítés: '+new Date().toLocaleTimeString('hu-HU')}
+async function refresh(){await fx();await Promise.allSettled([stock('vwce','VWCE'),stock('amd','AMD'),stock('sec0','SEC0')]);document.getElementById('updated').textContent='Utolsó frissítés: '+new Date().toLocaleTimeString('hu-HU')}
 refresh();setInterval(refresh,10000);
 </script></body></html>
