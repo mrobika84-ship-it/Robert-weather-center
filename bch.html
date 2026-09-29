@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BCH SOLO</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#21102e 0,#09070d 55%,#050507 100%);color:#f5f3f7;font-family:Arial,sans-serif;min-height:100vh;padding:4vh 5vw}.top{display:flex;justify-content:space-between;align-items:end;margin-bottom:4vh}.title{font-size:4vw;font-weight:800}.sub{color:#a78bfa;font-size:1.5vw}.live{color:#34d399;font-size:1.4vw}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5vw}.card{background:#151219;border:1px solid #34253f;border-radius:20px;padding:2vw;min-height:20vh;box-shadow:0 0 30px #6d28d922}.label{color:#a9a2ae;font-size:1.35vw;margin-bottom:1.2vh}.value{font-size:3.2vw;font-weight:800;color:#c084fc}.green{color:#34d399}.orange{color:#fbbf24}.small{font-size:1.25vw;color:#8f8797;margin-top:1vh}.footer{margin-top:3vh;text-align:center;color:#776f7d;font-size:1.1vw}.error{color:#fb7185}
+</style></head><body>
+<div class="top"><div><div class="title">Bitcoin Cash SOLO</div><div class="sub">NerdQaxe • MySoloPool</div></div><div id="status" class="live">● LIVE</div></div>
+<div class="grid">
+<div class="card"><div class="label">Aktuális hashrate</div><div id="hash" class="value">—</div></div>
+<div class="card"><div class="label">Best Difficulty</div><div id="best" class="value orange">—</div></div>
+<div class="card"><div class="label">Blocks Found</div><div id="blocks" class="value green">—</div></div>
+<div class="card"><div class="label">Luck</div><div id="luck" class="value green">—</div></div>
+<div class="card"><div class="label">Elfogadott share</div><div id="accepted" class="value">—</div></div>
+<div class="card"><div class="label">Elutasított share</div><div id="rejected" class="value">—</div></div>
+<div class="card"><div class="label">Utolsó difficulty</div><div id="lastdiff" class="value">—</div></div>
+<div class="card"><div class="label">Share / perc</div><div id="spm" class="value">—</div><div id="lastshare" class="small"></div></div>
+</div><div class="footer">qqw3yvsf…trh9y72tr35t3 • frissítés 10 másodpercenként</div>
+<script>
+const API='https://bitcoincash.mysolopool.com/api/client/qqw3yvsfjt4e45yw9ravhtuee3jvltrh9y72tr35t3';
+function fmtHash(n){n=Number(n||0);if(n>=1e15)return (n/1e15).toFixed(1)+' PH/s';if(n>=1e12)return (n/1e12).toFixed(1)+' TH/s';if(n>=1e9)return (n/1e9).toFixed(1)+' GH/s';return n.toLocaleString()+' H/s'}
+function fmtDiff(n){n=Number(n||0);if(n>=1e9)return (n/1e9).toFixed(1)+' G';if(n>=1e6)return (n/1e6).toFixed(1)+' M';if(n>=1e3)return (n/1e3).toFixed(1)+' K';return n.toFixed(0)}
+async function load(){try{const r=await fetch(API,{cache:'no-store'});if(!r.ok)throw Error(r.status);const d=await r.json();const w=(d.workers&&d.workers[0])||{};document.getElementById('hash').textContent=fmtHash(w.hashRate||d.totalHashrate);document.getElementById('best').textContent=fmtDiff(d.bestDifficulty||w.bestDifficulty);document.getElementById('blocks').textContent=d.blocksFound??d.blocks??0;document.getElementById('luck').textContent=((Number(d.luckPercent??d.luck??0))*((Number(d.luckPercent??0)<=1)?100:1)).toFixed(1)+'%';document.getElementById('accepted').textContent=w.acceptedShares??d.acceptedShares??'—';document.getElementById('rejected').textContent=w.rejectedShares??d.rejectedShares??'—';document.getElementById('lastdiff').textContent=fmtDiff(w.lastDifficulty||d.lastDifficulty);document.getElementById('spm').textContent=w.sharesPerMinute??'—';document.getElementById('lastshare').textContent='Utolsó share: '+(w.lastShare||d.lastShare||'—');document.getElementById('status').textContent='● LIVE';document.getElementById('status').className='live'}catch(e){document.getElementById('status').textContent='● ADATHIBA';document.getElementById('status').className='live error'}}
+load();setInterval(load,10000);
+</script></body></html>
