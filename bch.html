@@ -8,15 +8,13 @@ linear-gradient(135deg,#07110a 0%,#111a12 45%,#080a08 100%);overflow:hidden}
 body:before{content:"₿";position:fixed;right:3vw;top:3vh;font-size:42vw;font-weight:900;color:rgba(130,230,145,.055);transform:rotate(-12deg);z-index:-1}
 body:after{content:"BITCOIN CASH";position:fixed;left:-2vw;bottom:1vh;font-size:9vw;font-weight:900;letter-spacing:.04em;color:rgba(255,255,255,.025);z-index:-1}
 .top{display:flex;justify-content:space-between;align-items:end;margin-bottom:2.4vh}.title{font-size:3.5vw;font-weight:900}.sub{color:#76d88a;font-size:1.35vw}.live{color:#49e36e;font-size:1.4vw;font-weight:800}
-.hero{background:linear-gradient(135deg,rgba(21,51,27,.94),rgba(10,18,12,.94));border:1px solid rgba(94,218,119,.35);border-radius:24px;padding:1.8vw 2.4vw;margin-bottom:1.5vw;box-shadow:0 0 38px rgba(49,190,78,.13);display:flex;align-items:center;justify-content:space-between}
-.hero .label{font-size:1.45vw;color:#a8c9af;margin-bottom:.5vh}.hero .value{font-size:6.3vw;line-height:1;font-weight:900;color:#6ee787;text-shadow:0 0 28px rgba(68,220,102,.2)}.heroMark{font-size:5vw;font-weight:900;color:rgba(110,231,135,.32)}
+.hero{background:linear-gradient(135deg,rgba(21,51,27,.94),rgba(10,18,12,.94));border:1px solid rgba(94,218,119,.35);border-radius:24px;padding:1.8vw 2.4vw;margin-bottom:1.5vw;box-shadow:0 0 38px rgba(49,190,78,.13);display:flex;align-items:center;justify-content:space-between}.heroStack{display:flex;flex-direction:column;gap:1.4vh}.hero .label{font-size:1.45vw;color:#a8c9af;margin-bottom:.5vh}.hero .value{font-size:6.3vw;line-height:1;font-weight:900;color:#6ee787;text-shadow:0 0 28px rgba(68,220,102,.2)}.heroMark{font-size:5vw;font-weight:900;color:rgba(110,231,135,.32)}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25vw}.card{background:rgba(15,19,16,.9);border:1px solid rgba(91,135,100,.28);border-radius:18px;padding:1.55vw;min-height:16.5vh;box-shadow:0 0 24px rgba(0,0,0,.22)}.label{color:#a9b7ac;font-size:1.2vw;margin-bottom:.8vh}.value{font-size:2.65vw;font-weight:850;color:#d6f5dc}.green{color:#6ee787}.orange{color:#f6c85f}.small{font-size:1.05vw;color:#879b8b;margin-top:.7vh}.footer{margin-top:1.7vh;text-align:center;color:#68766b;font-size:1vw}.error{color:#fb7185}
 </style></head><body>
 <div class="top"><div><div class="title">Bitcoin Cash SOLO</div><div class="sub">NerdQaxe • MySoloPool</div></div><div id="status" class="live">● LIVE</div></div>
-<div class="hero"><div><div class="label">AKTUÁLIS HASHRATE</div><div id="hash" class="value">—</div></div><div class="heroMark">BCH</div></div>
+<div class="hero"><div class="heroStack"><div><div class="label">AKTUÁLIS HASHRATE</div><div id="hash" class="value">—</div></div><div><div class="label">TALÁLT BLOKKOK</div><div id="blocks" class="value">—</div></div></div><div class="heroMark">BCH</div></div>
 <div class="grid">
 <div class="card"><div class="label">Best Difficulty</div><div id="best" class="value orange">—</div></div>
-<div class="card"><div class="label">Blocks Found</div><div id="blocks" class="value green">—</div></div>
 <div class="card"><div class="label">Luck</div><div id="luck" class="value green">—</div></div>
 <div class="card"><div class="label">Share / perc</div><div id="spm" class="value">—</div><div id="lastshare" class="small"></div></div>
 <div class="card"><div class="label">Elfogadott share</div><div id="accepted" class="value">—</div></div>
