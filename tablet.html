@@ -5,12 +5,12 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#06101a}
 </style></head><body>
 <iframe class="screen active" id="weather" title="Időjárás" allow="fullscreen"></iframe>
 <iframe class="screen" id="markets" title="Befektetések" allow="fullscreen"></iframe>
-<iframe class="screen" id="dogs" title="Happy és Honey" allow="fullscreen"></iframe>
+<iframe class="screen" id="dogs" title="Happy és Honey" allow="fullscreen"></iframe>\n<iframe class="screen" id="dgb" title="DGB Solo" allow="fullscreen"></iframe>
 <script>
 const frames=[
   {el:document.getElementById('weather'),url:'https://robert-weather-center.pages.dev/'},
   {el:document.getElementById('markets'),url:'markets.html'},
-  {el:document.getElementById('dogs'),url:'dogs.html'}
+  {el:document.getElementById('dogs'),url:'dogs.html'},\n  {el:document.getElementById('dgb'),url:'dgb.html'}
 ];
 const stamp=Date.now();
 frames.forEach(f=>{f.el.src=f.url+(f.url.includes('?')?'&':'?')+'v7='+stamp});
