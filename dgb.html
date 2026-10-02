@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-store"><title>DGB SOLO</title>
+<style>
+*{box-sizing:border-box}body{margin:0;color:#fff;font-family:Arial,sans-serif;min-height:100vh;padding:3.2vh 4vw;background:linear-gradient(rgba(3,10,20,.78),rgba(3,7,16,.92)),radial-gradient(circle at 78% 18%,rgba(0,154,255,.20),transparent 30%),linear-gradient(135deg,#03101f 0%,#071b31 45%,#030912 100%);overflow:hidden}
+body:before{content:"D";position:fixed;right:3vw;top:0;font-size:43vw;font-weight:900;color:rgba(42,169,255,.055);transform:rotate(-10deg);z-index:-1}
+body:after{content:"DIGIBYTE";position:fixed;left:-1vw;bottom:0;font-size:9vw;font-weight:900;letter-spacing:.04em;color:rgba(255,255,255,.025);z-index:-1}
+.top{display:flex;justify-content:space-between;align-items:end;margin-bottom:2.4vh}.title{font-size:3.5vw;font-weight:900}.sub{color:#59bfff;font-size:1.35vw}.live{color:#49e38a;font-size:1.4vw;font-weight:800}.error{color:#fb7185}
+.hero{background:linear-gradient(135deg,rgba(8,42,70,.95),rgba(5,17,31,.95));border:1px solid rgba(72,174,255,.4);border-radius:24px;padding:1.8vw 2.4vw;margin-bottom:1.5vw;box-shadow:0 0 38px rgba(0,132,255,.14);display:flex;align-items:center;justify-content:space-between}.heroStack{display:flex;flex-direction:column;gap:1.4vh}.label{color:#a7bdd0;font-size:1.2vw;margin-bottom:.8vh}.hero .label{font-size:1.45vw}.hero .value{font-size:6.1vw;line-height:1;font-weight:900;color:#61c4ff;text-shadow:0 0 28px rgba(51,169,255,.25)}.heroMark{font-size:5vw;font-weight:900;color:rgba(97,196,255,.32)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25vw}.card{background:rgba(7,18,30,.92);border:1px solid rgba(72,126,166,.32);border-radius:18px;padding:1.55vw;min-height:16.5vh;box-shadow:0 0 24px rgba(0,0,0,.22)}.value{font-size:2.65vw;font-weight:850;color:#d9efff}.green{color:#65e69a}.blue{color:#61c4ff}.orange{color:#f6c85f}.small{font-size:1.05vw;color:#829db1;margin-top:.7vh}.footer{margin-top:1.7vh;text-align:center;color:#687f91;font-size:1vw}
+</style></head><body>
+<div class="top"><div><div class="title">DigiByte SOLO</div><div class="sub">NerdQaxe • SoloPool.eu • SHA-256</div></div><div id="status" class="live">● BETÖLTÉS</div></div>
+<div class="hero"><div class="heroStack"><div><div class="label">AKTUÁLIS HASHRATE</div><div id="hash" class="value">—</div></div><div><div class="label">TALÁLT BLOKKOK</div><div id="blocks" class="value">—</div></div></div><div class="heroMark">DGB</div></div>
+<div class="grid">
+<div class="card"><div class="label">24 ÓRÁS ÁTLAG</div><div id="avg" class="value blue">—</div></div>
+<div class="card"><div class="label">BEKÜLDÖTT SHARE</div><div id="shares" class="value">—</div></div>
+<div class="card"><div class="label">WORKER</div><div id="worker" class="value green">—</div><div id="lastshare" class="small"></div></div>
+<div class="card"><div class="label">BECSÜLT BLOKKIDŐ</div><div id="estimate" class="value orange">—</div></div>
+</div>
+<div class="footer">dgb1qt2w8z6k8…m2m3hl • frissítés 10 másodpercenként</div>
+<script>
+const ADDRESS='dgb1qt2w8z6k8tura70rufzrcvpyw89fverkrm2m3hl';
+const API='https://solopool.eu/api/v1/dgb/miner/'+encodeURIComponent(ADDRESS);
+function txt(v,f='—'){return v===undefined||v===null||v===''?f:String(v)}
+function ago(ts){if(!ts)return 'Utolsó share: —';const s=Math.max(0,Math.floor(Date.now()/1000-Number(ts)));if(s<60)return 'Utolsó share: '+s+' mp';if(s<3600)return 'Utolsó share: '+Math.floor(s/60)+' p';return 'Utolsó share: '+Math.floor(s/3600)+' ó'}
+function est(v){if(!v)return '—';const n=Number(v);if(!Number.isFinite(n))return txt(v);let s=n>Date.now()/1000?Math.max(0,n-Date.now()/1000):n;if(s<3600)return Math.max(1,Math.round(s/60))+' perc';if(s<86400)return (s/3600).toFixed(1)+' óra';return (s/86400).toFixed(1)+' nap'}
+async function load(){try{const r=await fetch(API,{cache:'no-store'});if(!r.ok)throw Error(r.status);const d=await r.json();const w=(d.workers&&d.workers[0])||{};document.getElementById('hash').textContent=txt(d.hashrate);document.getElementById('avg').textContent=txt(d.hashrate_24h);document.getElementById('shares').textContent=Number(d.shares_valid||0).toLocaleString('hu-HU');document.getElementById('blocks').textContent=d.blocks_found??0;document.getElementById('worker').textContent=w.status==='active'?'ONLINE':(w.status?String(w.status).toUpperCase():'—');document.getElementById('lastshare').textContent=ago(w.last_share||d.last_share);document.getElementById('estimate').textContent=est(d.est_time_block);const on=(w.status==='active'||Number(d.hashrate?.match?.(/[\d.]+/)?.[0]||0)>0);document.getElementById('status').textContent=on?'● MINING – ACTIVE':'● OFFLINE';document.getElementById('status').className=on?'live':'live error'}catch(e){document.getElementById('status').textContent='● ADATHIBA';document.getElementById('status').className='live error'}}
+load();setInterval(load,10000);
+</script></body></html>
