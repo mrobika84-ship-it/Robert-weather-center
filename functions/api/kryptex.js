@@ -3,13 +3,15 @@ export async function onRequestGet() {
   const worker = 'nerdqaxe1';
   const base = 'https://pool.kryptex.com/dgb/api/v1/miner';
   try {
-    const [cr, br] = await Promise.all([
+    const [cr, br, pr] = await Promise.all([
       fetch(base + '/chart/' + address + '/' + worker, {headers:{Accept:'application/json'}}),
-      fetch(base + '/balance/' + address, {headers:{Accept:'application/json'}})
+      fetch(base + '/balance/' + address, {headers:{Accept:'application/json'}}),
+      fetch('https://api.coingecko.com/api/v3/simple/price?ids=digibyte&vs_currencies=eur', {headers:{Accept:'application/json'}})
     ]);
     const chart = cr.ok ? await cr.json() : null;
     const balance = br.ok ? await br.json() : null;
-    return Response.json({chart,balance,status:{chart:cr.status,balance:br.status}}, {headers:{'Cache-Control':'no-store'}});
+    const price = pr.ok ? await pr.json() : null;
+    return Response.json({chart,balance,price,status:{chart:cr.status,balance:br.status,price:pr.status}}, {headers:{'Cache-Control':'no-store'}});
   } catch(e) {
     return Response.json({error:String(e)}, {status:500,headers:{'Cache-Control':'no-store'}});
   }
