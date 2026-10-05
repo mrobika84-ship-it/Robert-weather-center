@@ -5,7 +5,7 @@
 body:before{content:"D";position:fixed;right:3vw;top:0;font-size:43vw;font-weight:900;color:rgba(42,169,255,.055);transform:rotate(-10deg);z-index:-1}
 .top{display:flex;justify-content:space-between;align-items:end;margin-bottom:2.4vh}.title{font-size:3.5vw;font-weight:900}.sub{color:#59bfff;font-size:1.35vw}.live{color:#49e38a;font-size:1.4vw;font-weight:800}.error{color:#fb7185}
 .hero{background:linear-gradient(135deg,rgba(8,42,70,.95),rgba(5,17,31,.95));border:1px solid rgba(72,174,255,.4);border-radius:24px;padding:1.8vw 2.4vw;margin-bottom:1.5vw;box-shadow:0 0 38px rgba(0,132,255,.14);display:flex;align-items:center;justify-content:space-between}.label{color:#a7bdd0;font-size:1.2vw;margin-bottom:.8vh}.hero .label{font-size:1.45vw}.hero .value{font-size:6.1vw;line-height:1;font-weight:900;color:#61c4ff;text-shadow:0 0 28px rgba(51,169,255,.25)}.heroMark{font-size:4vw;font-weight:900;color:rgba(97,196,255,.32);text-align:right}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25vw}.card{background:rgba(7,18,30,.92);border:1px solid rgba(72,126,166,.32);border-radius:18px;padding:1.55vw;min-height:16.5vh}.value{font-size:2.65vw;font-weight:850;color:#d9efff}.green{color:#65e69a}.blue{color:#61c4ff}.orange{color:#f6c85f}.small{font-size:1.05vw;color:#829db1;margin-top:.7vh}.footer{margin-top:1.7vh;text-align:center;color:#687f91;font-size:1vw}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25vw}.card{background:rgba(7,18,30,.92);border:1px solid rgba(72,126,166,.32);border-radius:18px;padding:1.55vw;min-height:16.5vh}.value{font-size:2.65vw;font-weight:850;color:#d9efff}.green{color:#65e69a}.blue{color:#61c4ff}.orange{color:#f6c85f}.small{font-size:1.05vw;color:#829db1;margin-top:.7vh}.earned{margin-top:1.5vw;background:rgba(7,18,30,.92);border:1px solid rgba(72,126,166,.32);border-radius:18px;padding:1.25vw 1.8vw;display:flex;align-items:center;justify-content:space-between}.earned .label{margin:0;font-size:1.35vw}.earned .value{font-size:3vw;color:#65e69a}.footer{margin-top:1.2vh;text-align:center;color:#687f91;font-size:1vw}
 </style></head><body>
 <div class="top"><div><div class="title">DigiByte • Kryptex</div><div class="sub">NerdQaxe • PPS+ • SHA-256 • EU</div></div><div id="status" class="live">● BETÖLTÉS</div></div>
 <div class="hero"><div><div class="label">AKTUÁLIS HASHRATE • 30 PERC</div><div id="hash" class="value">—</div></div><div class="heroMark">DGB<br><span style="font-size:1.7vw">KRYPTEX PPS+</span></div></div>
@@ -15,6 +15,7 @@ body:before{content:"D";position:fixed;right:3vw;top:0;font-size:43vw;font-weigh
 <div class="card"><div class="label">WORKER</div><div id="worker" class="value green">nerdqaxe1</div><div id="valid" class="small">Valid share: —</div></div>
 <div class="card"><div class="label">EGYENLEG</div><div id="balance" class="value orange">—</div><div class="small">Kryptex • megerősített DGB</div></div>
 </div>
+<div class="earned"><div class="label">EDDIG KITERMELT DGB EURÓBAN</div><div id="earnedEur" class="value">—</div></div>
 <div class="footer">dgb1qt2w8z6k8…m2m3hl • nerdqaxe1 • frissítés 10 másodpercenként</div>
 <script>
 function nums(x,out=[]){if(x==null)return out;if(typeof x==='number'&&Number.isFinite(x)){out.push(x);return out}if(Array.isArray(x)){x.forEach(v=>nums(v,out));return out}if(typeof x==='object'){for(const [k,v] of Object.entries(x)){if(/hash/i.test(k)&&typeof v==='number'&&Number.isFinite(v))out.push(v);else if(typeof v==='object')nums(v,out)} }return out}
@@ -32,6 +33,8 @@ async function load(){try{
  document.getElementById('valid').textContent='PPS+ • ONLINE';
  const b=d.balance?.data||d.balance||{};const bal=b.confirmed??b.balance??b.confirmed_balance??b.amount??b.total;
  document.getElementById('balance').textContent=bal==null?'—':Number(bal).toLocaleString('hu-HU',{maximumFractionDigits:8})+' DGB';
+ const eur=Number(d.price?.digibyte?.eur);const earned=(bal==null||!Number.isFinite(eur))?null:Number(bal)*eur;
+ document.getElementById('earnedEur').textContent=earned==null?'—':earned.toLocaleString('hu-HU',{style:'currency',currency:'EUR',minimumFractionDigits:2,maximumFractionDigits:2});
  const on=p.length>0;
  document.getElementById('status').textContent=on?'● MINING – ACTIVE':'● KAPCSOLÓDVA';
  document.getElementById('status').className='live';
