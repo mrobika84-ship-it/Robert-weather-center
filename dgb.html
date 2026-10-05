@@ -33,7 +33,7 @@ async function load(){try{
  document.getElementById('valid').textContent='PPS+ • ONLINE';
  const b=d.balance?.data||d.balance||{};const bal=b.confirmed??b.balance??b.confirmed_balance??b.amount??b.total;
  document.getElementById('balance').textContent=bal==null?'—':Number(bal).toLocaleString('hu-HU',{maximumFractionDigits:8})+' DGB';
- const eur=Number(d.price?.digibyte?.eur);const earned=(bal==null||!Number.isFinite(eur))?null:Number(bal)*eur;
+ const eur=Number(d.eurPrice);const earned=(bal==null||!Number.isFinite(eur))?null:Number(bal)*eur;
  document.getElementById('earnedEur').textContent=earned==null?'—':earned.toLocaleString('hu-HU',{style:'currency',currency:'EUR',minimumFractionDigits:2,maximumFractionDigits:2});
  const on=p.length>0;
  document.getElementById('status').textContent=on?'● MINING – ACTIVE':'● KAPCSOLÓDVA';
