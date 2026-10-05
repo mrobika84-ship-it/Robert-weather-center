@@ -17,28 +17,26 @@ body:before{content:"D";position:fixed;right:3vw;top:0;font-size:43vw;font-weigh
 </div>
 <div class="footer">dgb1qt2w8z6k8…m2m3hl • nerdqaxe1 • frissítés 10 másodpercenként</div>
 <script>
-const ADDRESS='dgb1qt2w8z6k8tura70rufzrcvpyw89fverkrm2m3hl';
-const BASE='https://pool.kryptex.com/dgb/api';
-const fmtHash=n=>{n=Number(n||0);if(!n)return '0 H/s';const u=['H/s','KH/s','MH/s','GH/s','TH/s','PH/s'];let i=0;while(n>=1000&&i<u.length-1){n/=1000;i++}return (n>=100?n.toFixed(0):n>=10?n.toFixed(1):n.toFixed(2))+' '+u[i]};
-const pick=(o,...ks)=>{for(const k of ks){if(o&&o[k]!=null)return o[k]}return 0};
-async function json(url){const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw Error(r.status);return r.json()}
+function val(o,...keys){for(const k of keys){if(o&&o[k]!=null)return o[k]}return null}
+function hashText(v){if(v==null)return '—';if(typeof v==='string')return v;let n=Number(v);if(!Number.isFinite(n))return '—';const u=['H/s','KH/s','MH/s','GH/s','TH/s','PH/s'];let i=0;while(n>=1000&&i<u.length-1){n/=1000;i++}return (n>=100?n.toFixed(0):n>=10?n.toFixed(1):n.toFixed(2))+' '+u[i]}
+function getWorkers(x){if(Array.isArray(x))return x;if(Array.isArray(x?.workers))return x.workers;if(Array.isArray(x?.data))return x.data;if(Array.isArray(x?.result))return x.result;return []}
 async function load(){try{
- const [wd,bd]=await Promise.all([json(BASE+'/v3/miner/workers/'+ADDRESS),json(BASE+'/v1/miner/balance/'+ADDRESS)]);
- const list=Array.isArray(wd)?wd:(wd.workers||wd.data||wd.result||[]);
- const w=list.find(x=>String(x.name||x.worker||x.worker_name||'').toLowerCase()==='nerdqaxe1')||list[0]||{};
- const h30=pick(w,'hashrate_30m','hashrate30m','hashrate','hashrate_30min','hashrate30');
- const h3=pick(w,'hashrate_3h','hashrate3h','hashrate_3hour','hashrate3');
- const h24=pick(w,'hashrate_24h','hashrate24h','hashrate_24hour','hashrate24');
- document.getElementById('hash').textContent=typeof h30==='string'&&/[a-z]/i.test(h30)?h30:fmtHash(h30);
- document.getElementById('avg3').textContent=typeof h3==='string'&&/[a-z]/i.test(h3)?h3:fmtHash(h3);
- document.getElementById('avg24').textContent=typeof h24==='string'&&/[a-z]/i.test(h24)?h24:fmtHash(h24);
- document.getElementById('worker').textContent=w.name||w.worker||w.worker_name||'nerdqaxe1';
- document.getElementById('valid').textContent='Valid share: '+pick(w,'valid','valid_shares','shares_valid','accepted');
- const bal=pick(bd,'confirmed','balance','confirmed_balance','amount')||pick(bd.data||{},'confirmed','balance','confirmed_balance','amount');
- document.getElementById('balance').textContent=Number(bal||0).toLocaleString('hu-HU',{maximumFractionDigits:8})+' DGB';
- const on=Number(h30)>0||String(h30).match(/[1-9]/);
- document.getElementById('status').textContent=on?'● MINING – ACTIVE':'● OFFLINE';
- document.getElementById('status').className=on?'live':'live error';
+ const r=await fetch('/api/kryptex?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error(r.status);
+ const d=await r.json();if(d.error)throw Error(d.error);
+ const ws=getWorkers(d.workers);const w=ws.find(x=>String(val(x,'name','worker','worker_name')||'').toLowerCase()==='nerdqaxe1')||ws[0]||{};
+ const h30=val(w,'hashrate_30m','hashrate30m','hashrate_30min','hashrate30','hashrate');
+ const h3=val(w,'hashrate_3h','hashrate3h','hashrate_3hour','hashrate3');
+ const h24=val(w,'hashrate_24h','hashrate24h','hashrate_24hour','hashrate24');
+ document.getElementById('hash').textContent=hashText(h30);
+ document.getElementById('avg3').textContent=hashText(h3);
+ document.getElementById('avg24').textContent=hashText(h24);
+ document.getElementById('worker').textContent=val(w,'name','worker','worker_name')||'nerdqaxe1';
+ document.getElementById('valid').textContent='Valid share: '+(val(w,'valid','valid_shares','shares_valid','accepted')??'—');
+ const b=d.balance?.data||d.balance||{};const bal=val(b,'confirmed','balance','confirmed_balance','amount','total');
+ document.getElementById('balance').textContent=bal==null?'—':Number(bal).toLocaleString('hu-HU',{maximumFractionDigits:8})+' DGB';
+ const active=(String(val(w,'status','state')||'').toLowerCase().includes('online')||String(val(w,'status','state')||'').toLowerCase().includes('active')||Number(h30)>0);
+ document.getElementById('status').textContent=active?'● MINING – ACTIVE':'● KAPCSOLÓDVA';
+ document.getElementById('status').className='live';
 }catch(e){document.getElementById('status').textContent='● ADATHIBA';document.getElementById('status').className='live error'}}
 load();setInterval(load,10000);
 </script></body></html>
