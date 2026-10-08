@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta http-equiv="Cache-Control" content="no-store"><title>Mining-Dutch • Nerd Dashboard</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{color:#edf7ff;font-family:Arial,sans-serif;padding:3vh 4vw;background:radial-gradient(ellipse at 75% 12%,#123b53 0%,transparent 38%),linear-gradient(135deg,#06101b,#071d2b 55%,#040b14)}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3vh}.title{font-size:3.3vw;font-weight:900}.sub{font-size:1.4vw;color:#70b9e1;margin-top:.5vh}.status{font-size:1.4vw;font-weight:bold;color:#64e6a4}.hero{border:1px solid #27628a;border-radius:24px;background:#0b2438;padding:3vh 3vw;margin-bottom:2.5vh;box-shadow:0 0 30px #0c365455}.label{font-size:1.45vw;color:#a3c1d5;letter-spacing:.07em}.hash{font-size:8.5vw;font-weight:900;color:#70caff;line-height:1.25}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw}.card{border:1px solid #28506b;border-radius:20px;background:#0a1b2b;padding:2.5vh 2vw;min-height:22vh}.value{font-size:3.6vw;font-weight:850;margin-top:2vh}.green{color:#6ce5a0}.blue{color:#7dc9ff}.orange{color:#ffd17c}.foot{margin-top:3vh;text-align:center;font-size:1.2vw;color:#86a9bd}.error{color:#ff8b9a}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{color:#edf7ff;font-family:Arial,sans-serif;padding:3vh 4vw;background:radial-gradient(ellipse at 75% 12%,#123b53 0%,transparent 38%),linear-gradient(135deg,#06101b,#071d2b 55%,#040b14)}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3vh}.title{font-size:3.3vw;font-weight:900}.sub{font-size:1.4vw;color:#70b9e1;margin-top:.5vh}.status{font-size:1.4vw;font-weight:bold;color:#64e6a4}.hero{border:1px solid #27628a;border-radius:24px;background:#0b2438;padding:3vh 3vw;margin-bottom:2.5vh;box-shadow:0 0 30px #0c365455}.label{font-size:1.45vw;color:#a3c1d5;letter-spacing:.07em}.hash{font-size:8.5vw;font-weight:900;color:#70caff;line-height:1.25}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw}.money{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw;margin-top:2vh}.money .card{min-height:17vh;padding:2vh 2vw}.money .value{font-size:3.4vw;margin-top:1.4vh}.money .total{border-color:#3a9a82;background:#0a302f}.money .total .value{color:#79f3c1}.card{border:1px solid #28506b;border-radius:20px;background:#0a1b2b;padding:2.5vh 2vw;min-height:22vh}.value{font-size:3.6vw;font-weight:850;margin-top:2vh}.green{color:#6ce5a0}.blue{color:#7dc9ff}.orange{color:#ffd17c}.foot{margin-top:3vh;text-align:center;font-size:1.2vw;color:#86a9bd}.error{color:#ff8b9a}
 </style></head><body>
 <div class="top"><div><div class="title">Mining-Dutch • Nerd</div><div class="sub">SHA-256 • Élő bányászati statisztika</div></div><div id="status" class="status">● BETÖLTÉS</div></div>
 <div class="hero"><div class="label">AKTUÁLIS HASHRATE</div><div id="hash" class="hash">—</div></div>
@@ -10,9 +10,11 @@
 <div class="card"><div class="label">ÉRVÉNYES SHARE</div><div id="valid" class="value blue">—</div></div>
 <div class="card"><div class="label">ÉRVÉNYTELEN SHARE</div><div id="invalid" class="value orange">—</div></div>
 </div>
+<div class="money"><div class="card"><div class="label">BITCOIN EGYENLEG</div><div class="value blue" id="btc-eur">—</div></div><div class="card"><div class="label">DIGIBYTE EGYENLEG</div><div class="value blue" id="dgb-eur">—</div></div><div class="card total"><div class="label">BTC + DGB ÖSSZESEN</div><div class="value" id="total-eur">—</div></div></div>
 <div class="foot" id="updated">Frissítés 15 másodpercenként • Mining-Dutch API</div>
 <script>
 const fmt=new Intl.NumberFormat('hu-HU');
+const euro=new Intl.NumberFormat('hu-HU',{style:'currency',currency:'EUR',minimumFractionDigits:2,maximumFractionDigits:2});
 async function load(){try{
 const r=await fetch('https://mining-dutch-api.mrobika84.workers.dev/?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);
 const d=await r.json();if(d.error)throw Error(d.error);
@@ -21,8 +23,12 @@ document.getElementById('hash').textContent=(h/1e9).toLocaleString('hu-HU',{maxi
 document.getElementById('eff').textContent=Number.isFinite(Number(d.efficiency))?Number(d.efficiency).toLocaleString('hu-HU',{maximumFractionDigits:2})+'%':'—';
 document.getElementById('valid').textContent=Number.isFinite(Number(d.shares?.valid))?fmt.format(d.shares.valid):'—';
 document.getElementById('invalid').textContent=Number.isFinite(Number(d.shares?.invalid))?fmt.format(d.shares.invalid):'—';
+const eur=d.eur;
+for(const [id,key] of [['btc-eur','btc'],['dgb-eur','dgb'],['total-eur','total']]){
+const val=eur&&eur[key];document.getElementById(id).textContent=typeof val==='number'&&Number.isFinite(val)?euro.format(val):'—';
+}
 const t=d.updated?new Date(d.updated):null;
-document.getElementById('updated').textContent='Adatok: '+(t&&!isNaN(t)?t.toLocaleString('hu-HU'):'ismeretlen időpont')+' • Frissítés 15 másodpercenként';
+document.getElementById('updated').textContent='Adatok: '+(t&&!isNaN(t)?t.toLocaleString('hu-HU'):'ismeretlen időpont')+' • Frissítés 15 másodpercenként'+(!eur?' • EUR árfolyam nem elérhető':'');
 document.getElementById('status').textContent='● KAPCSOLÓDVA';document.getElementById('status').className='status';
 }catch(e){document.getElementById('status').textContent='● ADATHIBA';document.getElementById('status').className='status error';document.getElementById('updated').textContent='Mining-Dutch API: '+e.message}}
 load();setInterval(load,15000);
