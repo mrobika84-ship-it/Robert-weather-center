@@ -17,7 +17,7 @@ async function load(){try{
 const r=await fetch('https://mining-dutch-api.mrobika84.workers.dev/?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);
 const d=await r.json();if(d.error)throw Error(d.error);
 const h=Number(d.hashrate);if(!Number.isFinite(h))throw Error('Hiányzó hashrate');
-document.getElementById('hash').textContent=(h/1e12).toLocaleString('hu-HU',{maximumFractionDigits:2,minimumFractionDigits:2})+' TH/s';
+document.getElementById('hash').textContent=(h/1e9).toLocaleString('hu-HU',{maximumFractionDigits:2,minimumFractionDigits:2})+' TH/s';
 document.getElementById('eff').textContent=Number.isFinite(Number(d.efficiency))?Number(d.efficiency).toLocaleString('hu-HU',{maximumFractionDigits:2})+'%':'—';
 document.getElementById('valid').textContent=Number.isFinite(Number(d.shares?.valid))?fmt.format(d.shares.valid):'—';
 document.getElementById('invalid').textContent=Number.isFinite(Number(d.shares?.invalid))?fmt.format(d.shares.invalid):'—';
