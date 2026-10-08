@@ -1,43 +1,29 @@
 <!doctype html>
-<html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-store"><title>DGB • Kryptex PPS+</title>
+<html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta http-equiv="Cache-Control" content="no-store"><title>Mining-Dutch • Nerd Dashboard</title>
 <style>
-*{box-sizing:border-box}body{margin:0;color:#fff;font-family:Arial,sans-serif;min-height:100vh;padding:3.2vh 4vw;background:linear-gradient(rgba(3,10,20,.78),rgba(3,7,16,.92)),radial-gradient(circle at 78% 18%,rgba(0,154,255,.20),transparent 30%),linear-gradient(135deg,#03101f 0%,#071b31 45%,#030912 100%);overflow:hidden}
-body:before{content:"D";position:fixed;right:3vw;top:0;font-size:43vw;font-weight:900;color:rgba(42,169,255,.055);transform:rotate(-10deg);z-index:-1}
-.top{display:flex;justify-content:space-between;align-items:end;margin-bottom:2.4vh}.title{font-size:3.5vw;font-weight:900}.sub{color:#59bfff;font-size:1.35vw}.live{color:#49e38a;font-size:1.4vw;font-weight:800}.error{color:#fb7185}
-.hero{background:linear-gradient(135deg,rgba(8,42,70,.95),rgba(5,17,31,.95));border:1px solid rgba(72,174,255,.4);border-radius:24px;padding:1.8vw 2.4vw;margin-bottom:1.5vw;box-shadow:0 0 38px rgba(0,132,255,.14);display:flex;align-items:center;justify-content:space-between}.label{color:#a7bdd0;font-size:1.2vw;margin-bottom:.8vh}.hero .label{font-size:1.45vw}.hero .value{font-size:6.1vw;line-height:1;font-weight:900;color:#61c4ff;text-shadow:0 0 28px rgba(51,169,255,.25)}.heroMark{font-size:4vw;font-weight:900;color:rgba(97,196,255,.32);text-align:right}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25vw}.card{background:rgba(7,18,30,.92);border:1px solid rgba(72,126,166,.32);border-radius:18px;padding:1.55vw;min-height:16.5vh}.value{font-size:2.65vw;font-weight:850;color:#d9efff}.green{color:#65e69a}.blue{color:#61c4ff}.orange{color:#f6c85f}.small{font-size:1.05vw;color:#829db1;margin-top:.7vh}.earned{margin-top:1.5vw;background:rgba(7,18,30,.92);border:1px solid rgba(72,126,166,.32);border-radius:18px;padding:1.25vw 1.8vw;display:flex;align-items:center;justify-content:space-between}.earned .label{margin:0;font-size:1.35vw}.earned .value{font-size:3vw;color:#65e69a}.footer{margin-top:1.2vh;text-align:center;color:#687f91;font-size:1vw}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{color:#edf7ff;font-family:Arial,sans-serif;padding:3vh 4vw;background:radial-gradient(ellipse at 75% 12%,#123b53 0%,transparent 38%),linear-gradient(135deg,#06101b,#071d2b 55%,#040b14)}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3vh}.title{font-size:3.3vw;font-weight:900}.sub{font-size:1.4vw;color:#70b9e1;margin-top:.5vh}.status{font-size:1.4vw;font-weight:bold;color:#64e6a4}.hero{border:1px solid #27628a;border-radius:24px;background:#0b2438;padding:3vh 3vw;margin-bottom:2.5vh;box-shadow:0 0 30px #0c365455}.label{font-size:1.45vw;color:#a3c1d5;letter-spacing:.07em}.hash{font-size:8.5vw;font-weight:900;color:#70caff;line-height:1.25}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw}.card{border:1px solid #28506b;border-radius:20px;background:#0a1b2b;padding:2.5vh 2vw;min-height:22vh}.value{font-size:3.6vw;font-weight:850;margin-top:2vh}.green{color:#6ce5a0}.blue{color:#7dc9ff}.orange{color:#ffd17c}.foot{margin-top:3vh;text-align:center;font-size:1.2vw;color:#86a9bd}.error{color:#ff8b9a}
 </style></head><body>
-<div class="top"><div><div class="title">DigiByte • Kryptex</div><div class="sub">NerdQaxe • PPS+ • SHA-256 • EU</div></div><div id="status" class="live">● BETÖLTÉS</div></div>
-<div class="hero"><div><div class="label">AKTUÁLIS HASHRATE • 30 PERC</div><div id="hash" class="value">—</div></div><div class="heroMark">DGB<br><span style="font-size:1.7vw">KRYPTEX PPS+</span></div></div>
+<div class="top"><div><div class="title">Mining-Dutch • Nerd</div><div class="sub">SHA-256 • Élő bányászati statisztika</div></div><div id="status" class="status">● BETÖLTÉS</div></div>
+<div class="hero"><div class="label">AKTUÁLIS HASHRATE</div><div id="hash" class="hash">—</div></div>
 <div class="grid">
-<div class="card"><div class="label">3 ÓRÁS ÁTLAG</div><div id="avg3" class="value blue">—</div></div>
-<div class="card"><div class="label">24 ÓRÁS ÁTLAG</div><div id="avg24" class="value blue">—</div></div>
-<div class="card"><div class="label">WORKER</div><div id="worker" class="value green">nerdqaxe1</div><div id="valid" class="small">Valid share: —</div></div>
-<div class="card"><div class="label">EGYENLEG</div><div id="balance" class="value orange">—</div><div class="small">Kryptex • megerősített DGB</div></div>
+<div class="card"><div class="label">HATÉKONYSÁG</div><div id="eff" class="value green">—</div></div>
+<div class="card"><div class="label">ÉRVÉNYES SHARE</div><div id="valid" class="value blue">—</div></div>
+<div class="card"><div class="label">ÉRVÉNYTELEN SHARE</div><div id="invalid" class="value orange">—</div></div>
 </div>
-<div class="earned"><div class="label">EDDIG KITERMELT DGB EURÓBAN</div><div id="earnedEur" class="value">—</div></div>
-<div class="footer">dgb1qt2w8z6k8…m2m3hl • nerdqaxe1 • frissítés 10 másodpercenként</div>
+<div class="foot" id="updated">Frissítés 15 másodpercenként • Mining-Dutch API</div>
 <script>
-function nums(x,out=[]){if(x==null)return out;if(typeof x==='number'&&Number.isFinite(x)){out.push(x);return out}if(Array.isArray(x)){x.forEach(v=>nums(v,out));return out}if(typeof x==='object'){for(const [k,v] of Object.entries(x)){if(/hash/i.test(k)&&typeof v==='number'&&Number.isFinite(v))out.push(v);else if(typeof v==='object')nums(v,out)} }return out}
-function hashText(n){n=Number(n);if(!Number.isFinite(n)||n<=0)return '—';const u=['H/s','KH/s','MH/s','GH/s','TH/s','PH/s'];let i=0;while(n>=1000&&i<u.length-1){n/=1000;i++}return (n>=100?n.toFixed(0):n>=10?n.toFixed(1):n.toFixed(2))+' '+u[i]}
-function points(x,out=[]){if(Array.isArray(x)){for(const v of x){if(Array.isArray(v)&&v.length>=2&&Number.isFinite(Number(v[1])))out.push(Number(v[1]));else if(v&&typeof v==='object'){const h=v.hashrate??v.hash_rate??v.value??v.y;if(Number.isFinite(Number(h)))out.push(Number(h));else points(v,out)}}}else if(x&&typeof x==='object'){for(const v of Object.values(x))points(v,out)}return out}
-function avg(a,n){const z=a.filter(v=>Number.isFinite(v)&&v>=0);const s=n?z.slice(-n):z;return s.length?s.reduce((p,q)=>p+q,0)/s.length:0}
+const fmt=new Intl.NumberFormat('hu-HU');
 async function load(){try{
- const r=await fetch('/api/kryptex?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error(r.status);const d=await r.json();if(d.error)throw Error(d.error);
- let p=points(d.chart);if(!p.length)p=nums(d.chart);
- const h30=avg(p,2), h3=avg(p,12), h24=avg(p,96);
- document.getElementById('hash').textContent=hashText(h30);
- document.getElementById('avg3').textContent=hashText(h3);
- document.getElementById('avg24').textContent=hashText(h24);
- document.getElementById('worker').textContent='nerdqaxe1';
- document.getElementById('valid').textContent='PPS+ • ONLINE';
- const b=d.balance?.data||d.balance||{};const bal=b.confirmed??b.balance??b.confirmed_balance??b.amount??b.total;
- document.getElementById('balance').textContent=bal==null?'—':Number(bal).toLocaleString('hu-HU',{maximumFractionDigits:8})+' DGB';
- const eur=Number(d.eurPrice)>0?Number(d.eurPrice):0.00381;const earned=bal==null?null:Number(bal)*eur;
- document.getElementById('earnedEur').textContent=earned==null?'—':earned.toLocaleString('hu-HU',{style:'currency',currency:'EUR',minimumFractionDigits:earned<1?4:2,maximumFractionDigits:earned<1?4:2});
- const on=p.length>0;
- document.getElementById('status').textContent=on?'● MINING – ACTIVE':'● KAPCSOLÓDVA';
- document.getElementById('status').className='live';
-}catch(e){document.getElementById('status').textContent='● ADATHIBA';document.getElementById('status').className='live error'}}
-load();setInterval(load,10000);
+const r=await fetch('/api/mining-dutch?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);
+const d=await r.json();if(d.error)throw Error(d.error);
+const h=Number(d.hashrate);if(!Number.isFinite(h))throw Error('Hiányzó hashrate');
+document.getElementById('hash').textContent=(h/1e12).toLocaleString('hu-HU',{maximumFractionDigits:2,minimumFractionDigits:2})+' TH/s';
+document.getElementById('eff').textContent=Number.isFinite(Number(d.efficiency))?Number(d.efficiency).toLocaleString('hu-HU',{maximumFractionDigits:2})+'%':'—';
+document.getElementById('valid').textContent=Number.isFinite(Number(d.shares?.valid))?fmt.format(d.shares.valid):'—';
+document.getElementById('invalid').textContent=Number.isFinite(Number(d.shares?.invalid))?fmt.format(d.shares.invalid):'—';
+const t=d.updated?new Date(d.updated):null;
+document.getElementById('updated').textContent='Adatok: '+(t&&!isNaN(t)?t.toLocaleString('hu-HU'):'ismeretlen időpont')+' • Frissítés 15 másodpercenként';
+document.getElementById('status').textContent='● KAPCSOLÓDVA';document.getElementById('status').className='status';
+}catch(e){document.getElementById('status').textContent='● ADATHIBA';document.getElementById('status').className='status error';document.getElementById('updated').textContent='Mining-Dutch API: '+e.message}}
+load();setInterval(load,15000);
 </script></body></html>
